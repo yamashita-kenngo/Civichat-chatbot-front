@@ -20,15 +20,15 @@ const HeadMeta: FC<Props> = ({ title, description, ogpImage, path, isTop }) => (
     <meta
       property="og:url"
       content={
-        path ? `${process.env.NEXT_PUBLIC_BASE_URL}${path}` : `${process.env.NEXT_PUBLIC_BASE_URL}`
+        path ? `${process.env.PUBLIC_BASE_URL}${path}` : `${process.env.PUBLIC_BASE_URL}`
       }
     />
     <meta
       property="og:image"
       content={
         ogpImage
-          ? `${process.env.NEXT_PUBLIC_BASE_URL}${ogpImage}`
-          : `${process.env.NEXT_PUBLIC_BASE_URL}OGP.png`
+          ? `${process.env.PUBLIC_BASE_URL}${ogpImage}`
+          : `${process.env.PUBLIC_BASE_URL}OGP.png`
       }
     />
     <meta property="og:site_name" content={title ? title : 'Civichat'} />
@@ -37,7 +37,7 @@ const HeadMeta: FC<Props> = ({ title, description, ogpImage, path, isTop }) => (
     <meta
       name="twitter:url"
       content={
-        path ? `${process.env.NEXT_PUBLIC_BASE_URL}${path}` : `${process.env.NEXT_PUBLIC_BASE_URL}`
+        path ? `${process.env.PUBLIC_BASE_URL}${path}` : `${process.env.PUBLIC_BASE_URL}`
       }
     />
     <meta name="twitter:title" content={title ? title : 'Civichat'} />
@@ -46,18 +46,18 @@ const HeadMeta: FC<Props> = ({ title, description, ogpImage, path, isTop }) => (
       name="twitter:image"
       content={
         ogpImage
-          ? `${process.env.NEXT_PUBLIC_BASE_URL}${ogpImage}`
-          : `${process.env.NEXT_PUBLIC_BASE_URL}OGP.png`
+          ? `${process.env.PUBLIC_BASE_URL}${ogpImage}`
+          : `${process.env.PUBLIC_BASE_URL}OGP.png`
       }
     />
     <link
       rel="canonical"
       href={
-        path ? `${process.env.NEXT_PUBLIC_BASE_URL}${path}` : `${process.env.NEXT_PUBLIC_BASE_URL}`
+        path ? `${process.env.PUBLIC_BASE_URL}${path}` : `${process.env.PUBLIC_BASE_URL}`
       }
     />
-    <link rel="shortcut icon" href={`${process.env.NEXT_PUBLIC_BASE_URL}favicon.ico`} />
-    <link rel="apple-touch-icon" href={`${process.env.NEXT_PUBLIC_BASE_URL}logo.png`} />
+    <link rel="shortcut icon" href={`${process.env.PUBLIC_BASE_URL}favicon.ico`} />
+    <link rel="apple-touch-icon" href={`${process.env.PUBLIC_BASE_URL}logo.png`} />
   </Head>
 )
 
