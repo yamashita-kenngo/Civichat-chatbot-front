@@ -35,10 +35,7 @@ const changeDetailContent = (content: string | null): string => {
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   // @ts-ignore
   const urlId = context.params.id
-  const res = await fetch(
-    process.env.APIURL
-      ? `${process.env.APIURL}/others/${urlId}`
-      : `https://api.r3-gouu.civichat.jp/others/${urlId}`,
+  const res = await fetch( `${process.env.APIURL}/others?resultId=${urlId}`,
     {
       method: 'GET',
       headers: {
