@@ -81,7 +81,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId }) => {
             : "その他のこと"}
         </h3>
         {result.map((system) => (
-          <Link href={`${system.detailUrl}`}>
+          <Link href={`${system.detailUrl}`} key={system.serviceId}>
             <a className="flex border-gray-300 rounded-2xl border my-2.5">
               {/*
             <img
