@@ -16,6 +16,12 @@ type System = {
   service_id: string | null;
   support_content: string | null;
   target: string | null;
+  contact: string | null;
+  ibservation: string | null;
+  location: string | null;
+  administrative_service_category: string | null;
+  abstract: string | null;
+  issue_type: string | null;
 };
 
 type Props = {
@@ -50,7 +56,8 @@ export const getStaticProps: GetStaticProps = async (
     },
   });
   const OtherFromId = await res.json();
-  const seidoType = OtherFromId.result[0].name.split("-")[0];
+  console.log(OtherFromId);
+  const seidoType = OtherFromId.result[0].service_id.split("-")[0];
   let othersType;
   if (seidoType === "shibuya_preschool") {
     othersType = "施設";
@@ -103,21 +110,63 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
       </div>
       <div>
         <h3 className="text-xl p-2 font-bold">
-          {othersType !== '' ? `${othersType}一覧` : "一覧"}
+          {othersType !== "" ? `${othersType}一覧` : "一覧"}
         </h3>
         {result.map((system) => (
           <a className="">
             <div className="p-5">
-              <h3 className="text-xl font-bold py-2">{system.name}</h3>
+              <h3 className="text-xl font-bold py-4">{system.name}</h3>
               <table className="py-2 border-collapse">
-                <tr>
-                  <td className="text-gray-500 w-100 py-2">対象者</td>
-                  <td className="py-2 ">{system.target}</td>
-                </tr>
-                <tr>
-                  <td className="text-gray-500 w-20 py-2">支援内容</td>
-                  <td className="py-2">{system.support_content}</td>
-                </tr>
+                {system.target !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">対象者</td>
+                    <td className=" ">{system.target}</td>
+                  </tr>
+                ) : undefined}
+                {system.abstract !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">概要</td>
+                    <td className="py-2">{system.abstract}</td>
+                  </tr>
+                ) : undefined}
+                {system.issue_type !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">カテゴリー</td>
+                    <td className="py-2">{system.issue_type}</td>
+                  </tr>
+                ) : undefined}
+                {system.support_content !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">支援内容</td>
+                    <td className="py-2">{system.support_content}</td>
+                  </tr>
+                ) : undefined}
+                {system.administrative_service_category !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">カテゴリー</td>
+                    <td className="py-2">
+                      {system.administrative_service_category}
+                    </td>
+                  </tr>
+                ) : undefined}
+                {system.location !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">住所</td>
+                    <td className="py-2">{system.location}</td>
+                  </tr>
+                ) : undefined}
+                {system.ibservation !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">見学</td>
+                    <td className="py-2">{system.ibservation}</td>
+                  </tr>
+                ) : undefined}
+                {system.contact !== undefined ? (
+                  <tr>
+                    <td className="text-gray-500 w-35 py-2">お問い合わせ先</td>
+                    <td className="py-2">{system.contact}</td>
+                  </tr>
+                ) : undefined}
               </table>
               <Link
                 href={`${process.env.NEXT_PUBLIC_BASE_URL}/services/${system.service_id}`}
