@@ -13,7 +13,7 @@ type Props = {
   overview: string | null;
   area: string | null;
   target: string | null;
-  detailUrl: string | null;
+  detail_url: string | null;
   organization: string | null;
   acceptableDates: string | null;
   acceptableTimes: string | null;
@@ -21,10 +21,29 @@ type Props = {
   qualification: string | null;
   applyUrl: string | null;
   lastUpdated: string | null;
-  support_content: string | null;
-  detail_url: string | null;
-  url: string | null;
   image_url: string;
+  postal_address:string|null;
+  abstract:string|null;
+  issue_type:string|null;
+  support_content:string|null;
+  administrative_service_category:string|null;
+  type_nursery_school:string|null;
+  target_age:string|null;
+  location:string|null;
+  closed_days:string|null;
+  playground:string|null;
+  ibservation:string|null;
+  take_out_diapers:string|null;
+  extended_hours_childcare:string|null;
+  availability_of_childcare_facilities_for_0:string|null;
+  availability_of_childcare_facilities_for_1:string|null;
+  availability_of_childcare_facilities_for_2:string|null;
+  availability_of_childcare_facilities_for_3:string|null;
+  availability_of_childcare_facilities_for_4:string|null;
+  availability_of_childcare_facilities_for_5:string|null;
+  apply:string|null;
+  contact:string|null;
+  url:string|null;
 };
 
 interface LiModel {
@@ -45,7 +64,6 @@ export const getStaticProps: GetStaticProps = async (
   try {
     // @ts-ignore
     const urlId = context.params.id;
-    console.log(urlId);
     const res = await fetch(
       process.env.APIURL
         ? `${process.env.APIURL}/info/${urlId}`
@@ -59,8 +77,9 @@ export const getStaticProps: GetStaticProps = async (
     );
 
     const SystemFromId = await res.json();
+    console.log(SystemFromId);
     return {
-      props: { ...SystemFromId, othersType: "制度" },
+      props: SystemFromId,
       revalidate: 86400,
     };
   } catch (e) {
@@ -151,32 +170,86 @@ const SystemFromId: NextPage<Props> = (props) => {
         description={props.overview ? props.overview : ""}
         isTop={false}
       />
-
-      <div className="container mx-auto">
-        <img className="h-100" src={props.image_url} />
-      </div>
+      <img
+        className="w-full"
+        src={props.image_url}
+        width="100vw"
+        height="100%"
+        alt="hero"
+      />
       {props.name ? (
-        <h1 className="text-4xl font-bold">{props.name}</h1>
+        <h1 className="text-4xl font-bold py-4">{props.name}</h1>
       ) : undefined}
-      {props.overview ? <p className="mt-9">{props.overview}</p> : undefined}
-      {
-        <table className="py-2 border-collapse mt-4">
+      <table className="py-2 border-collapse">
+        {props.target !== undefined ? (
           <tr>
-            <td className="text-gray-500 w-20 py-2">対象者</td>
-            <td className="py-2">{props.target}</td>
+            <td className="text-gray-500 w-35 py-2">対象者</td>
+            <td className=" ">{props.target}</td>
           </tr>
-          {props.support_content ? (
-            <tr>
-              <td className="text-gray-500 w-20 py-2">支援内容</td>
-              <td className="py-2">{props.support_content}</td>
-            </tr>
-          ) : undefined}
-        </table>
-      }
+        ) : undefined}
+        {props.abstract !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">概要</td>
+            <td className="py-2">{props.abstract}</td>
+          </tr>
+        ) : undefined}
+        {props.issue_type !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">カテゴリー</td>
+            <td className="py-2">{props.issue_type}</td>
+          </tr>
+        ) : undefined}
+        {props.support_content !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">支援内容</td>
+            <td className="py-2">{props.support_content}</td>
+          </tr>
+        ) : undefined}
+        {props.administrative_service_category !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">カテゴリー</td>
+            <td className="py-2">{props.administrative_service_category}</td>
+          </tr>
+        ) : undefined}
+        {props.type_nursery_school !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">施設のカテゴリ</td>
+            <td className="py-2">{props.type_nursery_school}</td>
+          </tr>
+        ) : undefined}
+        {props.target_age !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">対象年齢</td>
+            <td className="py-2">{props.target_age}歳</td>
+          </tr>
+        ) : undefined}
+        {props.location !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">住所</td>
+            <td className="py-2">{props.location}</td>
+          </tr>
+        ) : undefined}
+      </table>
 
+      {props.overview ? <p className="mt-9">{props.overview}</p> : undefined}
+      {/*
+      <p className="mt-9 text-red-600 font-bold">このページは実証実験用のものです。</p>
+      <table className="py-2 border-collapse">
+        <tr>
+          <td className="text-gray-500 w-20 py-2">対象者</td>
+          <td className="py-2">{props.target}</td>
+        </tr>
+        {props.supportContent ? (
+          <tr>
+            <td className="text-gray-500 w-20 py-2">支援内容</td>
+            <td className="py-2">{props.supportContent}</td>
+          </tr>
+        ) : undefined}
+      </table>
+      */}
       {props.needs ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">必要書類</h2>
+          <h2 className="mt-3 text-2xl font-bold">必要なもの</h2>
           <ul className="my-5">
             {needsTestList(props.needs).map((need) => (
               <li
@@ -189,6 +262,106 @@ const SystemFromId: NextPage<Props> = (props) => {
           </ul>
         </div>
       ) : undefined}
+
+      {props.postal_address ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">申請窓口</h2>
+          <p className="my-5">{props.postal_address}</p>
+        </div>
+      ) : undefined}
+
+      {props.closed_days ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">休園日</h2>
+          <p className="my-5">{props.closed_days}</p>
+        </div>
+      ) : undefined}
+      {props.playground ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">園庭</h2>
+          <p className="my-5">{props.playground}</p>
+        </div>
+      ) : undefined}
+
+      {props.ibservation ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">見学</h2>
+          <p className="my-5">{props.ibservation}</p>
+        </div>
+      ) : undefined}
+
+      {props.take_out_diapers ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">おむつの持ち帰り</h2>
+          <p className="my-5">{props.take_out_diapers}</p>
+        </div>
+      ) : undefined}
+
+      {props.extended_hours_childcare ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">延長保育の対応時間</h2>
+          <p className="my-5">{props.extended_hours_childcare}</p>
+        </div>
+      ) : undefined}
+
+      {props.availability_of_childcare_facilities_for_0 ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
+          <table className="py-2 border-collapse">
+            <tr>
+              <td className="text-gray-500 w-50 py-2">0歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_0}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-50 py-2">1歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_1}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-50 py-2">2歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_2}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-50 py-2">3歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_3}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-50 py-2">4歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_4}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-50 py-2">5歳児</td>
+              <td className=" ">
+                {props.availability_of_childcare_facilities_for_5}
+              </td>
+            </tr>
+          </table>
+        </div>
+      ) : undefined}
+
+      {props.apply ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
+          <p className="my-5">{props.apply}</p>
+        </div>
+      ) : undefined}
+
+      {props.contact ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">お問い合わせ先</h2>
+          <p className="my-5">{props.contact}</p>
+        </div>
+      ) : undefined}
+
       {/*props.endReleaseDate ? (
         <div>
           <h2 className="text-2xl font-bold">申請期限</h2>
@@ -230,14 +403,14 @@ const SystemFromId: NextPage<Props> = (props) => {
       ) : undefined */}
       {props.detail_url ? (
         <a href={props.detail_url}>
-          <button className="container bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn-block">
+          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block">
             ホームページを見る
           </button>
         </a>
       ) : undefined}
       {props.url ? (
         <a href={props.url}>
-          <button className="container bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn-block">
+          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block">
             ホームページを見る
           </button>
         </a>
@@ -245,5 +418,4 @@ const SystemFromId: NextPage<Props> = (props) => {
     </div>
   );
 };
-
 export default SystemFromId;
