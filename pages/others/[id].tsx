@@ -113,7 +113,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
           {othersType !== "" ? `${othersType}一覧` : "一覧"}
         </h3>
         {result.map((system) => (
-          <a className="">
+          <a className="" key={system.service_id}>
             <div className="p-5">
               <h3 className="text-xl font-bold py-4">{system.name}</h3>
               <table className="py-2 border-collapse">
