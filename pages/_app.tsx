@@ -4,9 +4,6 @@ import '../styles/global.scss'
 import {useEffect} from "react";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  console.log(process.env.NEXT_PUBLIC_LIFFID)
-  console.log(process.env.NEXT_PUBLIC_APIURL)
-  console.log(process.env.NEXT_PUBLIC_BASE_URL)
   useEffect(() => {
     import('@line/liff').then((liff) => {
       // @ts-ignore

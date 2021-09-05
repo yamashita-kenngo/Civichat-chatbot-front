@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps = async (
       "Content-Type": "application/json",
     },
   });
+  console.log(res)
 
   const OtherFromId = await res.json();
   if (OtherFromId.result.length) {
