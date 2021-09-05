@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     const urlId = context.params.id
     const res = await fetch(
       process.env.APIURL
-        ? `${process.env.APIURL}/services/${urlId}`
+        ? `${process.env.APIURL}/info/${urlId}`
         : `https://r3-gouu-api.civichat.dev/services/${urlId}`,
       {
         method: 'GET',
