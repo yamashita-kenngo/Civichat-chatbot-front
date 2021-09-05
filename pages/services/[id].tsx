@@ -23,6 +23,8 @@ type Props = {
   lastUpdated: string | null;
   support_content: string | null;
   detail_url: string | null;
+  url: string | null;
+  image_url: string;
 };
 
 interface LiModel {
@@ -151,7 +153,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       />
 
       <div className="container mx-auto">
-        <img className="h-100" src="https://i.imgur.com/KU0CavH.png" />
+        <img className="h-100" src={props.image_url} />
       </div>
       {props.name ? (
         <h1 className="text-4xl font-bold">{props.name}</h1>
@@ -228,6 +230,13 @@ const SystemFromId: NextPage<Props> = (props) => {
       ) : undefined */}
       {props.detail_url ? (
         <a href={props.detail_url}>
+          <button className="container bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn-block">
+            ホームページを見る
+          </button>
+        </a>
+      ) : undefined}
+      {props.url ? (
+        <a href={props.url}>
           <button className="container bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn-block">
             ホームページを見る
           </button>
