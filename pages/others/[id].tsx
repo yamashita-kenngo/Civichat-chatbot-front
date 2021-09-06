@@ -28,6 +28,7 @@ type Props = {
   resultId: string;
   result: System[];
   othersType: string;
+  img_url: string;
 };
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
@@ -56,7 +57,6 @@ export const getStaticProps: GetStaticProps = async (
     },
   });
   const OtherFromId = await res.json();
-  console.log(OtherFromId);
   const seidoType = OtherFromId.result[0].service_id.split("-")[0];
   let othersType;
   if (seidoType === "shibuya_preschool") {
@@ -72,7 +72,11 @@ export const getStaticProps: GetStaticProps = async (
 
   if (OtherFromId.result.length) {
     return {
-      props: { ...OtherFromId, othersType: othersType },
+      props: {
+        ...OtherFromId,
+        othersType: othersType,
+        img_url: OtherFromId.img_url,
+      },
       revalidate: 3600,
     };
   }
@@ -81,7 +85,12 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
+const OthersFromId: NextPage<Props> = ({
+  result,
+  resultId,
+  othersType,
+  img_url,
+}) => {
   return (
     <div className="container items-center justify-center mx-auto px-2">
       <HeadMeta
@@ -93,7 +102,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
       <div>
         <div className="flex justify-center items-center">
           <div style={{ flexBasis: "70%" }} className="p-2">
-            <p className="font-black">
+            <p className="font-black text-2xl">
               あなたにぴったりの{othersType}が合計{result.length}
               個見つかりました！
             </p>
@@ -101,7 +110,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
           <img
             style={{ flexBasis: "50%", width: "50%" }}
             className="h-full m-2"
-            src="https://i.imgur.com/KU0CavH.png"
+            src={img_url}
             width="981"
             height="757"
             alt="タイトル画像"
@@ -109,7 +118,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
         </div>
       </div>
       <div>
-        <h3 className="text-xl p-2 font-bold">
+        <h3 className="text-xl px-5 font-bold text-2xl">
           {othersType !== "" ? `${othersType}一覧` : "一覧"}
         </h3>
         {result.map((system) => (
@@ -163,7 +172,7 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
                 ) : undefined}
                 {system.contact !== undefined ? (
                   <tr>
-                    <td className="text-gray-500 w-35 py-2">お問い合わせ先</td>
+                    <td className="text-gray-500 w-40 py-2">お問い合わせ先</td>
                     <td className="py-2">{system.contact}</td>
                   </tr>
                 ) : undefined}
@@ -172,11 +181,11 @@ const OthersFromId: NextPage<Props> = ({ result, resultId, othersType }) => {
                 href={`${process.env.NEXT_PUBLIC_BASE_URL}/services/${system.service_id}`}
                 key={system.service_id}
               >
-                <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
                   詳しく見る
                 </button>
               </Link>
-              <p className="border-t-2 mt-8"></p>
+              <p className="border-t-2 mt-4"></p>
               {/*
               <table className="py-2 border-collapse">
                 <tr>
