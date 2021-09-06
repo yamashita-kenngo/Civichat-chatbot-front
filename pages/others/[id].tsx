@@ -100,16 +100,16 @@ const OthersFromId: NextPage<Props> = ({
         isTop={false}
       />
       <div>
-        <div className="flex justify-center items-center">
-          <div style={{ flexBasis: "70%" }} className="p-2">
-            <p className="font-black text-2xl">
+        <div className="flex justify-center items-center pt-4 pb-4">
+          <div style={{ flexBasis: "80%" }} className="p-2">
+            <p className="font-black text-2xl px-2">
               あなたにぴったりの{othersType}が合計{result.length}
               個見つかりました！
             </p>
           </div>
           <img
-            style={{ flexBasis: "50%", width: "50%" }}
-            className="h-full m-2"
+            style={{ flexBasis: "30%", width: "30%" }}
+            className="h-full m-5"
             src={img_url}
             width="981"
             height="757"
