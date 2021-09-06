@@ -161,7 +161,11 @@ const OthersFromId: NextPage<Props> = ({
                 {system.location !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-35 py-2">住所</td>
-                    <td className="py-2">{system.location}</td>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
+                    >
+                      <td className="py-2">{system.location}</td>
+                    </a>
                   </tr>
                 ) : undefined}
                 {system.ibservation !== undefined ? (
@@ -173,7 +177,7 @@ const OthersFromId: NextPage<Props> = ({
                 {system.contact !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-40 py-2">お問い合わせ先</td>
-                    <td className="py-2">{system.contact}</td>
+                    <a href={`tel:${system.contact}`}><td className="py-2">{system.contact}</td></a>
                   </tr>
                 ) : undefined}
               </table>

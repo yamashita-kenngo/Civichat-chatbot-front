@@ -22,28 +22,28 @@ type Props = {
   applyUrl: string | null;
   lastUpdated: string | null;
   image_url: string;
-  postal_address:string|null;
-  abstract:string|null;
-  issue_type:string|null;
-  support_content:string|null;
-  administrative_service_category:string|null;
-  type_nursery_school:string|null;
-  target_age:string|null;
-  location:string|null;
-  closed_days:string|null;
-  playground:string|null;
-  ibservation:string|null;
-  take_out_diapers:string|null;
-  extended_hours_childcare:string|null;
-  availability_of_childcare_facilities_for_0:string|null;
-  availability_of_childcare_facilities_for_1:string|null;
-  availability_of_childcare_facilities_for_2:string|null;
-  availability_of_childcare_facilities_for_3:string|null;
-  availability_of_childcare_facilities_for_4:string|null;
-  availability_of_childcare_facilities_for_5:string|null;
-  apply:string|null;
-  contact:string|null;
-  url:string|null;
+  postal_address: string | null;
+  abstract: string | null;
+  issue_type: string | null;
+  support_content: string | null;
+  administrative_service_category: string | null;
+  type_nursery_school: string | null;
+  target_age: string | null;
+  location: string | null;
+  closed_days: string | null;
+  playground: string | null;
+  ibservation: string | null;
+  take_out_diapers: string | null;
+  extended_hours_childcare: string | null;
+  availability_of_childcare_facilities_for_0: string | null;
+  availability_of_childcare_facilities_for_1: string | null;
+  availability_of_childcare_facilities_for_2: string | null;
+  availability_of_childcare_facilities_for_3: string | null;
+  availability_of_childcare_facilities_for_4: string | null;
+  availability_of_childcare_facilities_for_5: string | null;
+  apply: string | null;
+  contact: string | null;
+  url: string | null;
 };
 
 interface LiModel {
@@ -163,7 +163,7 @@ const counterList = (str: string): LiModel[] => {
 
 const SystemFromId: NextPage<Props> = (props) => {
   return (
-    <div className="container px-5 mb-16 mt-10">
+    <div className="px-5 mt-10 items-center">
       <HeadMeta
         path={`info/${props.service_id}`}
         title={props.name}
@@ -171,19 +171,18 @@ const SystemFromId: NextPage<Props> = (props) => {
         isTop={false}
       />
       <img
-        className="w-full"
+        style={{ flexBasis: "40%", width: "40%" }}
+        className="mx-auto"
         src={props.image_url}
-        width="100vw"
-        height="100%"
         alt="hero"
       />
       {props.name ? (
-        <h1 className="text-4xl font-bold py-4">{props.name}</h1>
+        <h1 className="text-4xl font-bold py-4 mt-4">{props.name}</h1>
       ) : undefined}
       <table className="py-2 border-collapse">
         {props.target !== undefined ? (
           <tr>
-            <td className="text-gray-500 w-35 py-2">対象者</td>
+            <td className="text-gray-500 w-2/5 py-2">対象者</td>
             <td className=" ">{props.target}</td>
           </tr>
         ) : undefined}
@@ -213,7 +212,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         ) : undefined}
         {props.type_nursery_school !== undefined ? (
           <tr>
-            <td className="text-gray-500 w-35 py-2">施設のカテゴリ</td>
+            <td className="text-gray-500 w-2/5 py-2">施設のカテゴリ</td>
             <td className="py-2">{props.type_nursery_school}</td>
           </tr>
         ) : undefined}
@@ -226,7 +225,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         {props.location !== undefined ? (
           <tr>
             <td className="text-gray-500 w-35 py-2">住所</td>
-            <td className="py-2">{props.location}</td>
+            <a href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}><td className="py-2">{props.location}</td></a>
           </tr>
         ) : undefined}
       </table>
@@ -250,7 +249,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.needs ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">必要なもの</h2>
-          <ul className="my-5">
+          <ul className="my-2 mb-5">
             {needsTestList(props.needs).map((need) => (
               <li
                 key={need.message}
@@ -266,41 +265,41 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.postal_address ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申請窓口</h2>
-          <p className="my-5">{props.postal_address}</p>
+          <p className="my-2 mb-5">{props.postal_address}</p>
         </div>
       ) : undefined}
 
       {props.closed_days ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">休園日</h2>
-          <p className="my-5">{props.closed_days}</p>
+          <p className="my-2 mb-5">{props.closed_days}</p>
         </div>
       ) : undefined}
       {props.playground ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">園庭</h2>
-          <p className="my-5">{props.playground}</p>
+          <p className="my-2 mb-5">{props.playground}</p>
         </div>
       ) : undefined}
 
       {props.ibservation ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">見学</h2>
-          <p className="my-5">{props.ibservation}</p>
+          <p className="my-2 mb-5">{props.ibservation}</p>
         </div>
       ) : undefined}
 
       {props.take_out_diapers ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">おむつの持ち帰り</h2>
-          <p className="my-5">{props.take_out_diapers}</p>
+          <p className="my-2 mb-5">{props.take_out_diapers}</p>
         </div>
       ) : undefined}
 
       {props.extended_hours_childcare ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">延長保育の対応時間</h2>
-          <p className="my-5">{props.extended_hours_childcare}</p>
+          <p className="my-2 mb-5">{props.extended_hours_childcare}</p>
         </div>
       ) : undefined}
 
@@ -309,38 +308,38 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
           <table className="py-2 border-collapse">
             <tr>
-              <td className="text-gray-500 w-50 py-2">0歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2 w-60">0歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_0}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-50 py-2">1歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2">1歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_1}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-50 py-2">2歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2">2歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_2}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-50 py-2">3歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2">3歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_3}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-50 py-2">4歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2">4歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_4}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-50 py-2">5歳児</td>
-              <td className=" ">
+              <td className="text-gray-500 w-60 py-2">5歳児</td>
+              <td className="text-right">
                 {props.availability_of_childcare_facilities_for_5}
               </td>
             </tr>
@@ -351,21 +350,21 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.apply ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
-          <p className="my-5">{props.apply}</p>
+          <p className="my-2 mb-5">{props.apply}</p>
         </div>
       ) : undefined}
 
       {props.contact ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">お問い合わせ先</h2>
-          <p className="my-5">{props.contact}</p>
+          <a href={`tel:${props.contact}`}><td className="py-2">{props.contact}</td></a>
         </div>
       ) : undefined}
 
       {/*props.endReleaseDate ? (
         <div>
           <h2 className="text-2xl font-bold">申請期限</h2>
-          <p className="my-5">
+          <p className="my-2 mb-5">
             {props.endReleaseDate &&
             props.endReleaseDate !== '-' &&
             Number.isInteger(props.endReleaseDate)
@@ -377,7 +376,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.counter && props.counter !== '-' ? (
         <div>
           <h2 className="text-2xl font-bold">申請窓口</h2>
-          <ul className="my-5">
+          <ul className="my-2 mb-5">
             {counterList(props.counter).map((counter) => (
               <li key={counter.message} className={counter.isList ? 'list-disc ml-5' : undefined}>
                 {counter.message}
@@ -390,7 +389,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       (props.acceptableDates !== "-" || props.acceptableTimes !== "-") ? (
         <div>
           <h2 className="text-2xl font-bold">受付可能日時</h2>
-          <p className="my-5">
+          <p className="my-2 mb-5">
             {props.acceptableDates} {props.acceptableTimes}
           </p>
         </div>
@@ -398,19 +397,19 @@ const SystemFromId: NextPage<Props> = (props) => {
       {/*props.contact && props.contact !== '-' ? (
         <div>
           <h2 className="text-2xl font-bold">お問い合わせ先</h2>
-          <p className="my-5">{props.contact}</p>
+          <p className="my-2 mb-5">{props.contact}</p>
         </div>
       ) : undefined */}
       {props.detail_url ? (
         <a href={props.detail_url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block">
+          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
             ホームページを見る
           </button>
         </a>
       ) : undefined}
       {props.url ? (
         <a href={props.url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block">
+          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
             ホームページを見る
           </button>
         </a>
