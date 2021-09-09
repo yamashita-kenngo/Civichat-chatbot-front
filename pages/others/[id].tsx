@@ -182,7 +182,7 @@ const OthersFromId: NextPage<Props> = ({
                 ) : undefined}
               </table>
               <Link
-                href={`${process.env.NEXT_PUBLIC_BASE_URL}/services/${system.service_id}`}
+                href={`/services/${system.service_id}`}
                 key={system.service_id}
               >
                 <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
