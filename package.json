@@ -10,22 +10,22 @@
   },
   "dependencies": {
     "@line/liff": "^2.13.0",
-    "autoprefixer": "^10.2.6",
-    "dayjs": "^1.10.5",
-    "postcss": "^8.3.5",
-    "next": "9.5.5",
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "autoprefixer": "^10.3.4",
+    "dayjs": "^1.10.7",
+    "postcss": "^8.3.6",
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-md-spinner": "^1.0.0",
-    "sass": "^1.35.1",
-    "tailwindcss": "^2.2.4"
+    "sass": "^1.39.2",
+    "tailwindcss": "^2.2.15"
   },
   "devDependencies": {
-    "eslint": "7.30.0",
-    "eslint-config-next": "11.0.1",
-    "typescript": "4.3.5",
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.13"
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
+    "typescript": "4.4.2",
+    "@types/react": "17.0.20",
+    "@types/react-dom": "17.0.9"
   }
 }
 
