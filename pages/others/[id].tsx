@@ -162,6 +162,7 @@ const OthersFromId: NextPage<Props> = ({
                   <tr>
                     <td className="text-gray-500 w-35 py-2">住所</td>
                     <a
+                      target="_blank"
                       href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
                     >
                       <td className="py-2">{system.location}</td>
