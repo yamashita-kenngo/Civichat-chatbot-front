@@ -6,16 +6,15 @@ import {useEffect} from "react";
 const MyApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     import('@line/liff').then((liff) => {
-      // @ts-ignore
+      // // @ts-ignore
       // liff.init({liffId: process.env.NEXT_PUBLIC_LIFFID}).then(() => {
-      //   /*
       //   // @ts-ignore
       //   if(!liff.isLoggedIn()) {
       //     // @ts-ignore
       //     liff.login()
       //   }
       //   else {
-      //   }*/
+      //   }
       // })
     })
   }, [])
