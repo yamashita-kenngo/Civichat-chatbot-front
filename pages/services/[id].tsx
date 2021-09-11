@@ -225,7 +225,9 @@ const SystemFromId: NextPage<Props> = (props) => {
         {props.location !== undefined ? (
           <tr>
             <td className="text-gray-500 w-35 py-2">住所</td>
-            <a href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}><td className="py-2">{props.location}</td></a>
+            <a 
+            target="_blank"
+            href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}><td className="py-2">{props.location}</td></a>
           </tr>
         ) : undefined}
       </table>
