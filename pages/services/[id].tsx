@@ -562,7 +562,7 @@ const SystemFromId: NextPage<Props> = (props) => {
           <p className="my-2 mb-5">{props.contact}</p>
         </div>
       ) : undefined */}
-      <div className="flex flex-row">
+      <div className="flex flex-row pt-20">
         <div className="w-1/2 px-2">
           {props.detail_url ? (
             <a href={props.detail_url}>
