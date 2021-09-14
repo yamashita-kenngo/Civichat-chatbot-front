@@ -69,6 +69,9 @@ type Props = {
   lastyear_admission_point_for_4: string | null;
   lastyear_admission_point_for_5: string | null;
   ibservation_detail: string | null;
+  security: string | null;
+  parking: string | null;
+  baby_buggy: string | null;
 };
 
 interface LiModel {
@@ -326,6 +329,27 @@ const SystemFromId: NextPage<Props> = (props) => {
         <div>
           <h2 className="mt-3 text-2xl font-bold">延長保育の対応時間</h2>
           <p className="my-2 mb-5">{props.extended_hours_childcare}</p>
+        </div>
+      ) : undefined}
+
+      {props.security ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">施設のセキュリティ</h2>
+          <p className="my-2 mb-5">{props.security}</p>
+        </div>
+      ) : undefined}
+
+      {props.parking ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">駐車場</h2>
+          <p className="my-2 mb-5">{props.parking}</p>
+        </div>
+      ) : undefined}
+
+      {props.baby_buggy ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">バギー置き場</h2>
+          <p className="my-2 mb-5">{props.baby_buggy}</p>
         </div>
       ) : undefined}
 
