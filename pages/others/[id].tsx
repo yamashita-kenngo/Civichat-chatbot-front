@@ -217,11 +217,25 @@ const OthersFromId: NextPage<Props> = ({
           </a>
         ))}
       </div>
-      <div className="px-5 mb-5">
-        <h5 className="font-bold text-gray-500">記載しているデータについて</h5>
-        <p className="text-gray-500 text-sm">株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。</p>
-        <a href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4" rel="noopener noreferrer"><p className="text-gray-500 text-sm underline">渋谷区保育園2021_一覧表</p></a>
-      </div>
+
+      {othersType === "施設" ? (
+        <div className="px-5 mb-5">
+          <h5 className="font-bold text-gray-500">
+            記載しているデータについて
+          </h5>
+          <p className="text-gray-500 text-sm">
+            株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。
+          </p>
+          <a
+            href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4"
+            rel="noopener noreferrer"
+          >
+            <p className="text-gray-500 text-sm underline">
+              渋谷区保育園2021_一覧表
+            </p>
+          </a>
+        </div>
+      ) : undefined}
       {/*systems.slice(systems.length - 9, systems.length).length >= 1 ? (
         <div>
           <h3 className="text-xl p-2 font-bold">相談・窓口に関すること</h3>

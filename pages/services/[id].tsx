@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps = async (
     );
 
     const SystemFromId = await res.json();
-    const seidoType = SystemFromId.service_id.split('-')[0];
+    const seidoType = SystemFromId.service_id.split("-")[0];
     let othersType;
     if (seidoType === "shibuya_preschool") {
       othersType = "園への";
@@ -118,7 +118,7 @@ export const getStaticProps: GetStaticProps = async (
     } else {
       othersType = "";
     }
-    console.log(othersType)
+    console.log(othersType);
     return {
       props: { ...SystemFromId, othersType: othersType },
       revalidate: 86400,
@@ -516,7 +516,9 @@ const SystemFromId: NextPage<Props> = (props) => {
 
       {props.contact ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">{props.othersType}お問い合わせ</h2>
+          <h2 className="mt-3 text-2xl font-bold">
+            {props.othersType}お問い合わせ
+          </h2>
           <a href={`tel:${props.contact}`}>
             <td className="py-2">{props.contact}</td>
           </a>
@@ -584,21 +586,29 @@ const SystemFromId: NextPage<Props> = (props) => {
           ) : undefined}
         </div>
       </div>
-      <p className="border-t-2 mt-4"></p>
-      <div className="px-2 mb-5 pt-6">
-        <h5 className="font-bold text-gray-500">記載しているデータについて</h5>
-        <p className="text-gray-500 text-sm">
-          株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。
-        </p>
-        <a
-          href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4"
-          rel="noopener noreferrer"
-        >
-          <p className="text-gray-500 text-sm underline">
-            渋谷区保育園2021_一覧表
-          </p>
-        </a>
-      </div>
+
+      {props.othersType === "園への" ? (
+        <div>
+          <p className="border-t-2 mt-4"></p>
+          <div className="px-2 mb-5 pt-6">
+            <h5 className="font-bold text-gray-500">
+              記載しているデータについて
+            </h5>
+            <p className="text-gray-500 text-sm">
+              株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。
+            </p>
+            <a
+              href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4"
+              rel="noopener noreferrer"
+            >
+              <p className="text-gray-500 text-sm underline">
+                渋谷区保育園2021_一覧表
+              </p>
+            </a>
+          </div>
+        </div>
+      ) : undefined}
+      
     </div>
   );
 };
