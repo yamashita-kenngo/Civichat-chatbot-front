@@ -105,9 +105,21 @@ export const getStaticProps: GetStaticProps = async (
     );
 
     const SystemFromId = await res.json();
-    console.log(SystemFromId);
+    const seidoType = SystemFromId.service_id.split('-')[0];
+    let othersType;
+    if (seidoType === "shibuya_preschool") {
+      othersType = "園への";
+    } else if (
+      seidoType === "shibuya_parenting" ||
+      seidoType === "kumamoto_earthquake"
+    ) {
+      othersType = "";
+    } else {
+      othersType = "";
+    }
+    console.log(othersType)
     return {
-      props: SystemFromId,
+      props: { ...SystemFromId, othersType: othersType },
       revalidate: 86400,
     };
   } catch (e) {
@@ -503,7 +515,7 @@ const SystemFromId: NextPage<Props> = (props) => {
 
       {props.contact ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">お問い合わせ先</h2>
+          <h2 className="mt-3 text-2xl font-bold">{props.othersType}お問い合わせ</h2>
           <a href={`tel:${props.contact}`}>
             <td className="py-2">{props.contact}</td>
           </a>
