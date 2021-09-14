@@ -330,6 +330,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.availability_of_childcare_facilities_for_0 ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
+          <h4>令和3年10月1日入園分</h4>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-40 py-2">0歳児</td>
