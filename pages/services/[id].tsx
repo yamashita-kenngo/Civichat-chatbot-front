@@ -44,6 +44,30 @@ type Props = {
   apply: string | null;
   contact: string | null;
   url: string | null;
+  thisyear_admission_rate_for_0: string | null;
+  thisyear_admission_rate_for_1: string | null;
+  thisyear_admission_rate_for_2: string | null;
+  thisyear_admission_rate_for_3: string | null;
+  thisyear_admission_rate_for_4: string | null;
+  thisyear_admission_rate_for_5: string | null;
+  thisyear_admission_point_for_0: string | null;
+  thisyear_admission_point_for_1: string | null;
+  thisyear_admission_point_for_2: string | null;
+  thisyear_admission_point_for_3: string | null;
+  thisyear_admission_point_for_4: string | null;
+  thisyear_admission_point_for_5: string | null;
+  lastyear_admission_rate_for_0: string | null;
+  lastyear_admission_rate_for_1: string | null;
+  lastyear_admission_rate_for_2: string | null;
+  lastyear_admission_rate_for_3: string | null;
+  lastyear_admission_rate_for_4: string | null;
+  lastyear_admission_rate_for_5: string | null;
+  lastyear_admission_point_for_0: string | null;
+  lastyear_admission_point_for_1: string | null;
+  lastyear_admission_point_for_2: string | null;
+  lastyear_admission_point_for_3: string | null;
+  lastyear_admission_point_for_4: string | null;
+  lastyear_admission_point_for_5: string | null;
 };
 
 interface LiModel {
@@ -308,39 +332,135 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
           <table className="py-2 border-collapse">
             <tr>
-              <td className="text-gray-500 w-60 py-2 w-60">0歳児</td>
+              <td className="text-gray-500 w-40 py-2">0歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_0}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-60 py-2">1歳児</td>
+              <td className="text-gray-500 w-40 py-2">1歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_1}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-60 py-2">2歳児</td>
+              <td className="text-gray-500 w-40 py-2">2歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_2}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-60 py-2">3歳児</td>
+              <td className="text-gray-500 w-40 py-2">3歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_3}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-60 py-2">4歳児</td>
+              <td className="text-gray-500 w-40 py-2">4歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_4}
               </td>
             </tr>
             <tr>
-              <td className="text-gray-500 w-60 py-2">5歳児</td>
+              <td className="text-gray-500 w-40 py-2">5歳児</td>
               <td className="text-right">
                 {props.availability_of_childcare_facilities_for_5}
+              </td>
+            </tr>
+          </table>
+        </div>
+      ) : undefined}
+
+      {props.thisyear_admission_rate_for_0 ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold py-2">前年度までの申込状況</h2>
+          <h3>令和3年度(倍率/最下指数)</h3>
+          <table className="py-2 border-collapse">
+            <tr>
+              <td className="text-gray-500 w-40 py-2">0歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_0}/
+                {props.thisyear_admission_point_for_0}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">1歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_1}/
+                {props.thisyear_admission_point_for_1}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">2歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_2}/
+                {props.thisyear_admission_point_for_2}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">3歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_3}/
+                {props.thisyear_admission_point_for_3}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">4歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_4}/
+                {props.thisyear_admission_point_for_4}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">5歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_5}/
+                {props.thisyear_admission_point_for_5}
+              </td>
+            </tr>
+          </table>
+          <h3>令和2年度(倍率/最下指数)</h3>
+          <table className="py-2 border-collapse">
+            <tr>
+              <td className="text-gray-500 w-40 py-2">0歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_0}/
+                {props.lastyear_admission_point_for_0}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">1歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_1}/
+                {props.lastyear_admission_point_for_1}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">2歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_2}/
+                {props.lastyear_admission_point_for_2}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">3歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_3}/
+                {props.lastyear_admission_point_for_3}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">4歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_4}/
+                {props.lastyear_admission_point_for_4}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">5歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_5}/
+                {props.lastyear_admission_point_for_5}
               </td>
             </tr>
           </table>
@@ -357,7 +477,9 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.contact ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">お問い合わせ先</h2>
-          <a href={`tel:${props.contact}`}><td className="py-2">{props.contact}</td></a>
+          <a href={`tel:${props.contact}`}>
+            <td className="py-2">{props.contact}</td>
+          </a>
         </div>
       ) : undefined}
 
