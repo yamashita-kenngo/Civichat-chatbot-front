@@ -376,7 +376,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
-      {props.availability_of_childcare_facilities_for_0 ? (
+      {props.thisyear_admission_rate_for_0 ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold py-2">前年度までの申込状況</h2>
           <h3>令和3年度(倍率/最下指数)</h3>
