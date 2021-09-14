@@ -72,6 +72,7 @@ type Props = {
   security: string | null;
   parking: string | null;
   baby_buggy: string | null;
+  othersType: string | null;
 };
 
 interface LiModel {
