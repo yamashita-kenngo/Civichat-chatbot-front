@@ -249,12 +249,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         {props.location !== undefined ? (
           <tr>
             <td className="text-gray-500 w-35 py-2">住所</td>
-            <a
-              target="_blank"
-              href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}
-            >
-              <td className="py-2">{props.location}</td>
-            </a>
+            <td className="py-2">{props.location}</td>
           </tr>
         ) : undefined}
       </table>
@@ -527,20 +522,28 @@ const SystemFromId: NextPage<Props> = (props) => {
           <p className="my-2 mb-5">{props.contact}</p>
         </div>
       ) : undefined */}
-      {props.detail_url ? (
-        <a href={props.detail_url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-            ホームページを見る
-          </button>
-        </a>
-      ) : undefined}
-      {props.url ? (
-        <a href={props.url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-            ホームページを見る
-          </button>
-        </a>
-      ) : undefined}
+      <div className="flex flex-row">
+        <div className="w-1/2 px-2">
+          {props.detail_url ? (
+            <a href={props.detail_url}>
+              <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                ホームページ
+              </button>
+            </a>
+          ) : undefined}
+        </div>
+        <div className="w-1/2 px-2">
+          {props.location ? (
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}
+            >
+              <button className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                場所を確認
+              </button>
+            </a>
+          ) : undefined}
+        </div>
+      </div>
     </div>
   );
 };
