@@ -545,6 +545,12 @@ const SystemFromId: NextPage<Props> = (props) => {
           ) : undefined}
         </div>
       </div>
+      <p className="border-t-2 mt-4"></p>
+      <div className="px-2 mb-5 pt-6">
+        <h5 className="font-bold text-gray-500">記載しているデータについて</h5>
+        <p className="text-gray-500 text-sm">株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。</p>
+        <a href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4" rel="noopener noreferrer"><p className="text-gray-500 text-sm underline">渋谷区保育園2021_一覧表</p></a>
+      </div>
     </div>
   );
 };
