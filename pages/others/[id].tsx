@@ -179,28 +179,46 @@ const OthersFromId: NextPage<Props> = ({
                   </tr>
                 ) : undefined}
               </table>
-              <div className="flex flex-row">
-                <div className="w-1/2 px-2">
-                  <Link
-                    href={`/services/${system.service_id}`}
-                    key={system.service_id}
-                  >
-                    <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
-                      詳しく見る
-                    </button>
-                  </Link>
+
+              {system.service_id !== undefined &&
+              system.location !== undefined ? (
+                <div className="flex flex-row">
+                  <div className="w-1/2 px-2">
+                    <Link
+                      href={`/services/${system.service_id}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        詳しく見る
+                      </button>
+                    </Link>
+                  </div>
+                  <div className="w-1/2 px-2">
+                    <Link
+                      href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        場所をみる
+                      </button>
+                    </Link>
+                  </div>
                 </div>
-                <div className="w-1/2 px-2">
-                  <Link
-                    href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
-                    key={system.service_id}
-                  >
-                    <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
-                      場所をみる
-                    </button>
-                  </Link>
+              ) : (
+                <div className="flex flex-row">
+                  <div className="w-full px-2">
+                    <Link
+                      href={`/services/${system.service_id}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        詳しく見る
+                      </button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              )}
+
               <p className="border-t-2 mt-4"></p>
               {/*
               <table className="py-2 border-collapse">

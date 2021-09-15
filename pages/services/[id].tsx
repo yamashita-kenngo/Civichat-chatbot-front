@@ -564,28 +564,43 @@ const SystemFromId: NextPage<Props> = (props) => {
           <p className="my-2 mb-5">{props.contact}</p>
         </div>
       ) : undefined */}
-      <div className="flex flex-row pt-20">
-        <div className="w-1/2 px-2">
-          {props.detail_url ? (
-            <a href={props.detail_url}>
-              <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-                ホームページ
-              </button>
-            </a>
-          ) : undefined}
+
+      {props.detail_url !== undefined && props.location !== undefined ? (
+        <div className="flex flex-row pt-20">
+          <div className="w-1/2 px-2">
+            {props.detail_url ? (
+              <a href={props.detail_url}>
+                <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  ホームページ
+                </button>
+              </a>
+            ) : undefined}
+          </div>
+          <div className="w-1/2 px-2">
+            {props.location ? (
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}
+              >
+                <button className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  場所を見る
+                </button>
+              </a>
+            ) : undefined}
+          </div>
         </div>
-        <div className="w-1/2 px-2">
-          {props.location ? (
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}
-            >
-              <button className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-                場所を見る
-              </button>
-            </a>
-          ) : undefined}
+      ) : (
+        <div className="flex flex-row pt-20">
+          <div className="w-full px-2">
+            {props.detail_url ? (
+              <a href={props.detail_url}>
+                <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  ホームページ
+                </button>
+              </a>
+            ) : undefined}
+          </div>
         </div>
-      </div>
+      )}
 
       {props.othersType === "園への" ? (
         <div>
@@ -608,7 +623,6 @@ const SystemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       ) : undefined}
-      
     </div>
   );
 };
