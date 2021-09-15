@@ -118,7 +118,7 @@ export const getStaticProps: GetStaticProps = async (
     } else {
       othersType = "";
     }
-    console.log(SystemFromId);
+    console.log(othersType);
     return {
       props: { ...SystemFromId, othersType: othersType },
       revalidate: 86400,
@@ -619,7 +619,7 @@ const SystemFromId: NextPage<Props> = (props) => {
           </table>
         </div>
       ) : undefined}
-
+        
       {props.apply ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
