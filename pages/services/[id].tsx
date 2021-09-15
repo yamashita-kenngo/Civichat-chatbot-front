@@ -354,7 +354,7 @@ const SystemFromId: NextPage<Props> = (props) => {
 
       {props.parking ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">駐車場</h2>
+          <h2 className="mt-3 text-2xl font-bold">駐輪場</h2>
           <p className="my-2 mb-5">{props.parking}</p>
         </div>
       ) : undefined}
