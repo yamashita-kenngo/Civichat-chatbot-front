@@ -22,6 +22,18 @@ type System = {
   administrative_service_category: string | null;
   abstract: string | null;
   issue_type: string | null;
+  thisyear_admission_rate_for_0: string | null;
+  thisyear_admission_rate_for_1: string | null;
+  thisyear_admission_rate_for_2: string | null;
+  thisyear_admission_rate_for_3: string | null;
+  thisyear_admission_rate_for_4: string | null;
+  thisyear_admission_rate_for_5: string | null;
+  thisyear_admission_point_for_0: string | null;
+  thisyear_admission_point_for_1: string | null;
+  thisyear_admission_point_for_2: string | null;
+  thisyear_admission_point_for_3: string | null;
+  thisyear_admission_point_for_4: string | null;
+  thisyear_admission_point_for_5: string | null;
 };
 
 type Props = {
@@ -179,6 +191,115 @@ const OthersFromId: NextPage<Props> = ({
                   </tr>
                 ) : undefined}
               </table>
+
+              {system.thisyear_admission_rate_for_0 ||
+              system.thisyear_admission_rate_for_1 ||
+              system.thisyear_admission_rate_for_2 ||
+              system.thisyear_admission_rate_for_3 ||
+              system.thisyear_admission_rate_for_4 ||
+              system.thisyear_admission_rate_for_5 ? (
+                <div>
+                  <h3>令和3年度申し込み状況(倍率/最下指数)</h3>
+                  <table className="py-2 border-collapse">
+                    <tr>
+                      <td className="text-gray-500 w-40 py-2">0歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_0 ? (
+                          <span>{system.thisyear_admission_rate_for_0}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_0 ? (
+                          <span>{system.thisyear_admission_point_for_0}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-500  w-40 py-2">1歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_1 ? (
+                          <span>{system.thisyear_admission_rate_for_1}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_1 ? (
+                          <span>{system.thisyear_admission_point_for_1}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-500  w-40 py-2">2歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_2 ? (
+                          <span>{system.thisyear_admission_rate_for_2}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_2 ? (
+                          <span>{system.thisyear_admission_point_for_2}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-500  w-40 py-2">3歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_3 ? (
+                          <span>{system.thisyear_admission_rate_for_3}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_3 ? (
+                          <span>{system.thisyear_admission_point_for_3}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-500  w-40 py-2">4歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_4 ? (
+                          <span>{system.thisyear_admission_rate_for_4}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_4 ? (
+                          <span>{system.thisyear_admission_point_for_4}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-gray-500  w-40 py-2">5歳児</td>
+                      <td className="text-right">
+                        {system.thisyear_admission_rate_for_5 ? (
+                          <span>{system.thisyear_admission_rate_for_5}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                        /
+                        {system.thisyear_admission_point_for_5 ? (
+                          <span>{system.thisyear_admission_point_for_5}</span>
+                        ) : (
+                          <span>-</span>
+                        )}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              ) : undefined}
 
               {system.service_id !== undefined &&
               system.location !== undefined ? (
