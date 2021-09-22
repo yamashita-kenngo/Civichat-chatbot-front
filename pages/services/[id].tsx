@@ -44,6 +44,35 @@ type Props = {
   apply: string | null;
   contact: string | null;
   url: string | null;
+  thisyear_admission_rate_for_0: string | null;
+  thisyear_admission_rate_for_1: string | null;
+  thisyear_admission_rate_for_2: string | null;
+  thisyear_admission_rate_for_3: string | null;
+  thisyear_admission_rate_for_4: string | null;
+  thisyear_admission_rate_for_5: string | null;
+  thisyear_admission_point_for_0: string | null;
+  thisyear_admission_point_for_1: string | null;
+  thisyear_admission_point_for_2: string | null;
+  thisyear_admission_point_for_3: string | null;
+  thisyear_admission_point_for_4: string | null;
+  thisyear_admission_point_for_5: string | null;
+  lastyear_admission_rate_for_0: string | null;
+  lastyear_admission_rate_for_1: string | null;
+  lastyear_admission_rate_for_2: string | null;
+  lastyear_admission_rate_for_3: string | null;
+  lastyear_admission_rate_for_4: string | null;
+  lastyear_admission_rate_for_5: string | null;
+  lastyear_admission_point_for_0: string | null;
+  lastyear_admission_point_for_1: string | null;
+  lastyear_admission_point_for_2: string | null;
+  lastyear_admission_point_for_3: string | null;
+  lastyear_admission_point_for_4: string | null;
+  lastyear_admission_point_for_5: string | null;
+  ibservation_detail: string | null;
+  security: string | null;
+  parking: string | null;
+  baby_buggy: string | null;
+  othersType: string | null;
 };
 
 interface LiModel {
@@ -77,9 +106,21 @@ export const getStaticProps: GetStaticProps = async (
     );
 
     const SystemFromId = await res.json();
-    console.log(SystemFromId);
+    const seidoType = SystemFromId.service_id.split("-")[0];
+    let othersType;
+    if (seidoType === "shibuya_preschool") {
+      othersType = "園への";
+    } else if (
+      seidoType === "shibuya_parenting" ||
+      seidoType === "kumamoto_earthquake"
+    ) {
+      othersType = "";
+    } else {
+      othersType = "";
+    }
+    console.log(othersType);
     return {
-      props: SystemFromId,
+      props: { ...SystemFromId, othersType: othersType },
       revalidate: 86400,
     };
   } catch (e) {
@@ -225,9 +266,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         {props.location !== undefined ? (
           <tr>
             <td className="text-gray-500 w-35 py-2">住所</td>
-            <a 
-            target="_blank"
-            href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}><td className="py-2">{props.location}</td></a>
+            <td className="py-2">{props.location}</td>
           </tr>
         ) : undefined}
       </table>
@@ -288,6 +327,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         <div>
           <h2 className="mt-3 text-2xl font-bold">見学</h2>
           <p className="my-2 mb-5">{props.ibservation}</p>
+          <p className="my-2 mb-5">{props.ibservation_detail}</p>
         </div>
       ) : undefined}
 
@@ -305,9 +345,31 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
+      {props.security ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">施設のセキュリティ</h2>
+          <p className="my-2 mb-5">{props.security}</p>
+        </div>
+      ) : undefined}
+
+      {props.parking ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">駐輪場</h2>
+          <p className="my-2 mb-5">{props.parking}</p>
+        </div>
+      ) : undefined}
+
+      {props.baby_buggy ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">バギー置き場</h2>
+          <p className="my-2 mb-5">{props.baby_buggy}</p>
+        </div>
+      ) : undefined}
+
       {props.availability_of_childcare_facilities_for_0 ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
+          <h4>令和3年10月1日入園分</h4>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-60 py-2 w-60">0歳児</td>
@@ -349,6 +411,215 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
+      {props.thisyear_admission_rate_for_0 ||
+      props.thisyear_admission_rate_for_1 ||
+      props.thisyear_admission_rate_for_2 ||
+      props.thisyear_admission_rate_for_3 ||
+      props.thisyear_admission_rate_for_4 ||
+      props.thisyear_admission_rate_for_5 ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold py-2">前年度までの申込状況</h2>
+          <h3>令和3年度(倍率/最下指数)</h3>
+          <table className="py-2 border-collapse">
+            <tr>
+              <td className="text-gray-500 w-40 py-2">0歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_0 ? (
+                  <span>{props.thisyear_admission_rate_for_0}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_0 ? (
+                  <span>{props.thisyear_admission_point_for_0}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">1歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_1 ? (
+                  <span>{props.thisyear_admission_rate_for_1}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_1 ? (
+                  <span>{props.thisyear_admission_point_for_1}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">2歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_2 ? (
+                  <span>{props.thisyear_admission_rate_for_2}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_2 ? (
+                  <span>{props.thisyear_admission_point_for_2}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">3歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_3 ? (
+                  <span>{props.thisyear_admission_rate_for_3}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_3 ? (
+                  <span>{props.thisyear_admission_point_for_3}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">4歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_4 ? (
+                  <span>{props.thisyear_admission_rate_for_4}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_4 ? (
+                  <span>{props.thisyear_admission_point_for_4}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500  w-40 py-2">5歳児</td>
+              <td className="text-right">
+                {props.thisyear_admission_rate_for_5 ? (
+                  <span>{props.thisyear_admission_rate_for_5}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.thisyear_admission_point_for_5 ? (
+                  <span>{props.thisyear_admission_point_for_5}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+          </table>
+          <h3>令和2年度(倍率/最下指数)</h3>
+          <table className="py-2 border-collapse">
+            <tr>
+              <td className="text-gray-500 w-40 py-2">0歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_0 ? (
+                  <span>{props.lastyear_admission_rate_for_0}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_0 ? (
+                  <span>{props.lastyear_admission_point_for_0}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">1歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_1 ? (
+                  <span>{props.lastyear_admission_rate_for_1}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_1 ? (
+                  <span>{props.lastyear_admission_point_for_1}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">2歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_2 ? (
+                  <span>{props.lastyear_admission_rate_for_2}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_2 ? (
+                  <span>{props.lastyear_admission_point_for_2}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">3歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_3 ? (
+                  <span>{props.lastyear_admission_rate_for_3}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_3 ? (
+                  <span>{props.lastyear_admission_point_for_3}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">4歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_4 ? (
+                  <span>{props.lastyear_admission_rate_for_4}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_4 ? (
+                  <span>{props.lastyear_admission_point_for_4}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <td className="text-gray-500 w-40 py-2">5歳児</td>
+              <td className="text-right">
+                {props.lastyear_admission_rate_for_5 ? (
+                  <span>{props.lastyear_admission_rate_for_5}</span>
+                ) : (
+                  <span>-</span>
+                )}
+                /
+                {props.lastyear_admission_point_for_5 ? (
+                  <span>{props.lastyear_admission_point_for_5}</span>
+                ) : (
+                  <span>-</span>
+                )}
+              </td>
+            </tr>
+          </table>
+        </div>
+      ) : undefined}
+        
       {props.apply ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
@@ -358,8 +629,12 @@ const SystemFromId: NextPage<Props> = (props) => {
 
       {props.contact ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">お問い合わせ先</h2>
-          <a href={`tel:${props.contact}`}><td className="py-2">{props.contact}</td></a>
+          <h2 className="mt-3 text-2xl font-bold">
+            {props.othersType}お問い合わせ
+          </h2>
+          <a href={`tel:${props.contact}`}>
+            <td className="py-2">{props.contact}</td>
+          </a>
         </div>
       ) : undefined}
 
@@ -402,19 +677,64 @@ const SystemFromId: NextPage<Props> = (props) => {
           <p className="my-2 mb-5">{props.contact}</p>
         </div>
       ) : undefined */}
-      {props.detail_url ? (
-        <a href={props.detail_url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-            ホームページを見る
-          </button>
-        </a>
-      ) : undefined}
-      {props.url ? (
-        <a href={props.url}>
-          <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
-            ホームページを見る
-          </button>
-        </a>
+
+      {props.detail_url !== undefined && props.location !== undefined ? (
+        <div className="flex flex-row pt-20">
+          <div className="w-1/2 px-2">
+            {props.detail_url ? (
+              <a href={props.detail_url}>
+                <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  ホームページ
+                </button>
+              </a>
+            ) : undefined}
+          </div>
+          <div className="w-1/2 px-2">
+            {props.location ? (
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${props.location}`}
+              >
+                <button className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  場所を見る
+                </button>
+              </a>
+            ) : undefined}
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-row pt-20">
+          <div className="w-full px-2">
+            {props.detail_url ? (
+              <a href={props.detail_url}>
+                <button className="container bg-blue-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+                  ホームページ
+                </button>
+              </a>
+            ) : undefined}
+          </div>
+        </div>
+      )}
+
+      {props.othersType === "園への" ? (
+        <div>
+          <p className="border-t-2 mt-4"></p>
+          <div className="px-2 mb-5 pt-6">
+            <h5 className="font-bold text-gray-500">
+              記載しているデータについて
+            </h5>
+            <p className="text-gray-500 text-sm">
+              株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。
+            </p>
+            <a
+              href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4"
+              rel="noopener noreferrer"
+            >
+              <p className="text-gray-500 text-sm underline">
+                渋谷区保育園2021_一覧表
+              </p>
+            </a>
+          </div>
+        </div>
       ) : undefined}
     </div>
   );

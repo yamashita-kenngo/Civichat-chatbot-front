@@ -161,12 +161,7 @@ const OthersFromId: NextPage<Props> = ({
                 {system.location !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-35 py-2">住所</td>
-                    <a
-                      target="_blank"
-                      href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
-                    >
-                      <td className="py-2">{system.location}</td>
-                    </a>
+                    <td className="py-2">{system.location}</td>
                   </tr>
                 ) : undefined}
                 {system.ibservation !== undefined ? (
@@ -178,18 +173,52 @@ const OthersFromId: NextPage<Props> = ({
                 {system.contact !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-40 py-2">お問い合わせ先</td>
-                    <a href={`tel:${system.contact}`}><td className="py-2">{system.contact}</td></a>
+                    <a href={`tel:${system.contact}`}>
+                      <td className="py-2">{system.contact}</td>
+                    </a>
                   </tr>
                 ) : undefined}
               </table>
-              <Link
-                href={`/services/${system.service_id}`}
-                key={system.service_id}
-              >
-                <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
-                  詳しく見る
-                </button>
-              </Link>
+
+              {system.service_id !== undefined &&
+              system.location !== undefined ? (
+                <div className="flex flex-row">
+                  <div className="w-1/2 px-2">
+                    <Link
+                      href={`/services/${system.service_id}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        詳しく見る
+                      </button>
+                    </Link>
+                  </div>
+                  <div className="w-1/2 px-2">
+                    <Link
+                      href={`https://www.google.com/maps/search/?api=1&query=${system.location}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        場所をみる
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-row">
+                  <div className="w-full px-2">
+                    <Link
+                      href={`/services/${system.service_id}`}
+                      key={system.service_id}
+                    >
+                      <button className="container hover:bg-blue-500 font-semibold hover:text-white py-2  my-4 px-4 border border-black-500 hover:border-transparent rounded btn-block">
+                        詳しく見る
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               <p className="border-t-2 mt-4"></p>
               {/*
               <table className="py-2 border-collapse">
@@ -206,6 +235,25 @@ const OthersFromId: NextPage<Props> = ({
           </a>
         ))}
       </div>
+
+      {othersType === "施設" ? (
+        <div className="px-5 mb-5">
+          <h5 className="font-bold text-gray-500">
+            記載しているデータについて
+          </h5>
+          <p className="text-gray-500 text-sm">
+            株式会社Civichatが独自に収集したデータのほか、渋谷区議会神薗まちこ議員が独自調査の結果、公開しているデータを承諾の上、利用しています。
+          </p>
+          <a
+            href="https://docs.google.com/spreadsheets/d/19jDzX0feJ8-SzVEn3VEwe5OF348dsnDU0zzss9CrlZ4"
+            rel="noopener noreferrer"
+          >
+            <p className="text-gray-500 text-sm underline">
+              渋谷区保育園2021_一覧表
+            </p>
+          </a>
+        </div>
+      ) : undefined}
       {/*systems.slice(systems.length - 9, systems.length).length >= 1 ? (
         <div>
           <h3 className="text-xl p-2 font-bold">相談・窓口に関すること</h3>
