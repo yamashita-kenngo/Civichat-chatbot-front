@@ -113,7 +113,8 @@ export const getStaticProps: GetStaticProps = async (
       othersType = "園への";
     } else if (
       seidoType === "shibuya_parenting" ||
-      seidoType === "kumamoto_earthquake"
+      seidoType === "kumamoto_earthquake" ||
+      seidoType === "japan"
     ) {
       othersType = "";
     } else {
