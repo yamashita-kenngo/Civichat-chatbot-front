@@ -73,6 +73,7 @@ type Props = {
   parking: string | null;
   baby_buggy: string | null;
   othersType: string | null;
+  hours_childcare: string | null;
 };
 
 interface LiModel {
@@ -112,7 +113,8 @@ export const getStaticProps: GetStaticProps = async (
       othersType = "園への";
     } else if (
       seidoType === "shibuya_parenting" ||
-      seidoType === "kumamoto_earthquake"
+      seidoType === "kumamoto_earthquake" ||
+      seidoType === "japan"
     ) {
       othersType = "";
     } else {
@@ -335,6 +337,13 @@ const SystemFromId: NextPage<Props> = (props) => {
         <div>
           <h2 className="mt-3 text-2xl font-bold">おむつの持ち帰り</h2>
           <p className="my-2 mb-5">{props.take_out_diapers}</p>
+        </div>
+      ) : undefined}
+
+      {props.hours_childcare ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">通常保育の対応時間</h2>
+          <p className="my-2 mb-5">{props.hours_childcare}</p>
         </div>
       ) : undefined}
 
@@ -619,7 +628,7 @@ const SystemFromId: NextPage<Props> = (props) => {
           </table>
         </div>
       ) : undefined}
-        
+
       {props.apply ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
