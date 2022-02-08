@@ -74,6 +74,7 @@ type Props = {
   baby_buggy: string | null;
   othersType: string | null;
   hours_childcare: string | null;
+  seidoType: string;
 };
 
 interface LiModel {
@@ -122,7 +123,11 @@ export const getStaticProps: GetStaticProps = async (
     }
     console.log(othersType);
     return {
-      props: { ...SystemFromId, othersType: othersType },
+      props: {
+        ...SystemFromId,
+        othersType: othersType,
+        seidoType: seidoType,
+      },
       revalidate: 86400,
     };
   } catch (e) {
@@ -641,13 +646,17 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold">
             {props.othersType}お問い合わせ
           </h2>
-          {props.location !== undefined ? (
+          {props.seidoType === "shibuya_parenting" ? (
             <a href={`tel:${props.contact}`}>
               <td className="py-2">{props.contact}</td>
             </a>
           ) : (
-            <td className="py-2">{props.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
-          )}
+            props.seidoType === "kumamoto_earthquake") ? (
+              <td className="py-2">{props.contact}</td>
+            ) : (
+              <td className="py-2">{props.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
+            )
+          }
         </div>
       ) : undefined}
 

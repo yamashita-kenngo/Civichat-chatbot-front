@@ -41,6 +41,7 @@ type Props = {
   result: System[];
   othersType: string;
   img_url: string;
+  seidoType: string;
 };
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
@@ -89,6 +90,7 @@ export const getStaticProps: GetStaticProps = async (
         ...OtherFromId,
         othersType: othersType,
         img_url: OtherFromId.img_url,
+        seidoType: seidoType,
       },
       revalidate: 3600,
     };
@@ -103,6 +105,7 @@ const OthersFromId: NextPage<Props> = ({
   resultId,
   othersType,
   img_url,
+  seidoType,
 }) => {
   return (
     <div className="container items-center justify-center mx-auto px-2">
@@ -186,13 +189,17 @@ const OthersFromId: NextPage<Props> = ({
                 {system.contact !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-40 py-2">お問い合わせ先</td>
-                    {system.location !== undefined ? (
+                    {seidoType === "shibuya_parenting" ? (
                       <a href={`tel:${system.contact}`}>
                         <td className="py-2">{system.contact}</td>
                       </a>
                     ) : (
-                      <td className="py-2">{system.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
-                    )}
+                      seidoType === "kumamoto_earthquake") ? (
+                        <td className="py-2">{system.contact}</td>
+                      ) : (
+                        <td className="py-2">{system.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
+                      )
+                    }
                   </tr>
                 ) : undefined}
               </table>
