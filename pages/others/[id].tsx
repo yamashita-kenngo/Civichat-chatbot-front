@@ -191,7 +191,7 @@ const OthersFromId: NextPage<Props> = ({
                         <td className="py-2">{system.contact}</td>
                       </a>
                     ) : (
-                      <td className="py-2">{system.contact}</td>
+                      <td className="py-2">{system.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
                     )}
                   </tr>
                 ) : undefined}
