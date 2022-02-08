@@ -191,9 +191,7 @@ const OthersFromId: NextPage<Props> = ({
                         <td className="py-2">{system.contact}</td>
                       </a>
                     ) : (
-                      <a href={system.contact}>
-                        <td className="py-2">{system.contact}</td>
-                      </a>
+                      <td className="py-2">{system.contact}</td>
                     )}
                   </tr>
                 ) : undefined}

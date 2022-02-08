@@ -646,9 +646,7 @@ const SystemFromId: NextPage<Props> = (props) => {
               <td className="py-2">{props.contact}</td>
             </a>
           ) : (
-            <a href={props.contact}>
               <td className="py-2">{props.contact}</td>
-            </a>
           )}
         </div>
       ) : undefined}
