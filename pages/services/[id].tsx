@@ -641,9 +641,15 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold">
             {props.othersType}お問い合わせ
           </h2>
-          <a href={`tel:${props.contact}`}>
-            <td className="py-2">{props.contact}</td>
-          </a>
+          {props.location !== undefined ? (
+            <a href={`tel:${props.contact}`}>
+              <td className="py-2">{props.contact}</td>
+            </a>
+          ) : (
+            <a href={props.contact}>
+              <td className="py-2">{props.contact}</td>
+            </a>
+          )}
         </div>
       ) : undefined}
 

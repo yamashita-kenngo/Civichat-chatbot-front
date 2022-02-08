@@ -186,9 +186,15 @@ const OthersFromId: NextPage<Props> = ({
                 {system.contact !== undefined ? (
                   <tr>
                     <td className="text-gray-500 w-40 py-2">お問い合わせ先</td>
-                    <a href={`tel:${system.contact}`}>
-                      <td className="py-2">{system.contact}</td>
-                    </a>
+                    {system.location !== undefined ? (
+                      <a href={`tel:${system.contact}`}>
+                        <td className="py-2">{system.contact}</td>
+                      </a>
+                    ) : (
+                      <a href={system.contact}>
+                        <td className="py-2">{system.contact}</td>
+                      </a>
+                    )}
                   </tr>
                 ) : undefined}
               </table>
