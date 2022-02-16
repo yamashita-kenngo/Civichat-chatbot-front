@@ -14,7 +14,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         // @ts-ignore
         if(!liff.isLoggedIn()) {
           // @ts-ignore
-          alert(`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`)
+          //alert(`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`)
+          // @ts-ignore
           liff.login({ redirectUri: `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}` })
         }else{
           // @ts-ignore
@@ -25,7 +26,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         }
       })
     })
-  }, [])
+  }, [router.asPath])
   return (
     <>
       <Head>
