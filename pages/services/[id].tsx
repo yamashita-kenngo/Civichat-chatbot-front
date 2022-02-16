@@ -6,6 +6,7 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
+import Script from 'next/script'
 
 type Props = {
   service_id: string;
@@ -75,6 +76,7 @@ type Props = {
   othersType: string | null;
   hours_childcare: string | null;
   seidoType: string;
+  userId: string;
 };
 
 interface LiModel {
@@ -207,6 +209,25 @@ const counterList = (str: string): LiModel[] => {
     });
 };
 
+const doCnange = async (event: { target: { checked: boolean; name: string; }; }) => {
+  //console.log(event.target.checked, event.target.name);
+  //alert(`${event.target.checked}, ${event.target.name.split(',')[0]}, ${event.target.name.split(',')[1]}`)
+  const res = await fetch(
+    `https://oci2.keitan.dev/user?userId=${event.target.name.split(",")[0]}&serviceId=${event.target.name.split(",")[1]}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: event.target.name.split(",")[0],
+        serviceId: event.target.name.split(",")[1],
+      }),
+    }
+  );
+  console.log(res)
+};
+
 const SystemFromId: NextPage<Props> = (props) => {
   return (
     <div className="px-5 mt-10 items-center">
@@ -222,6 +243,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         src={props.image_url}
         alt="hero"
       />
+      <input type="checkbox" onChange={ doCnange } name={`${props.lineId},${props.service_id}`}></input>
       {props.name ? (
         <h1 className="text-4xl font-bold py-4 mt-4">{props.name}</h1>
       ) : undefined}

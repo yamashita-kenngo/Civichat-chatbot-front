@@ -1,21 +1,29 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from "next/router";
 import '../styles/global.scss'
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+  const [lineId, setLineId] = useState('Loading...');
   useEffect(() => {
     import('@line/liff').then((liff) => {
-      // // @ts-ignore
-      // liff.init({liffId: process.env.NEXT_PUBLIC_LIFFID}).then(() => {
-      //   // @ts-ignore
-      //   if(!liff.isLoggedIn()) {
-      //     // @ts-ignore
-      //     liff.login()
-      //   }
-      //   else {
-      //   }
-      // })
+      // @ts-ignore
+      liff.init({liffId: process.env.NEXT_PUBLIC_LIFFID}).then(() => {
+        // @ts-ignore
+        if(!liff.isLoggedIn()) {
+          // @ts-ignore
+          alert(`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}`)
+          liff.login({ redirectUri: `${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}` })
+        }else{
+          // @ts-ignore
+          liff.getProfile()
+            .then((profile: { userId: string}) => {
+              setLineId(profile.userId);
+            })
+        }
+      })
     })
   }, [])
   return (
@@ -30,7 +38,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           rel="stylesheet"
         />
       </Head>
-      <Component {...pageProps} />
+      <Component {...pageProps} lineId={lineId} />
     </>
   )
 }
