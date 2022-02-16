@@ -6,7 +6,7 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
-import Script from 'next/script'
+import { PropsWithChildren, ReactNode } from "react";
 
 type Props = {
   service_id: string;
@@ -76,7 +76,7 @@ type Props = {
   othersType: string | null;
   hours_childcare: string | null;
   seidoType: string;
-  userId: string;
+  children: ReactNode;
 };
 
 interface LiModel {
@@ -228,7 +228,7 @@ const doCnange = async (event: { target: { checked: boolean; name: string; }; })
   console.log(res)
 };
 
-const SystemFromId: NextPage<Props> = (props) => {
+const SystemFromId: NextPage<Props> = (props: PropsWithChildren<any>) => {
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
