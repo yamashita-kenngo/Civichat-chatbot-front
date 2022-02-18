@@ -6,7 +6,12 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
+<<<<<<< Updated upstream
 import Script from 'next/script'
+=======
+import { SetStateAction, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+>>>>>>> Stashed changes
 
 type Props = {
   service_id: string;
@@ -217,18 +222,48 @@ const doCnange = async (event: { target: { checked: boolean; name: string; }; })
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: event.target.name.split(",")[0],
-        serviceId: event.target.name.split(",")[1],
-      }),
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
     }
   );
   console.log(res)
 };
 
+const getUserFav = async (userId: SetStateAction<string>, serviceId: string, setUserFav: { (value: SetStateAction<boolean>): void; (arg0: boolean): void; }) => {
+  const res = await fetch(
+    `https://oci2.keitan.dev/user?userId=${userId}`,
+    {
+      method: "GET"
+    }
+  );
+  for(const fav of await res.json()){
+    if(fav === serviceId){
+      setUserFav(true)
+    }
+  }
+}
+
 const SystemFromId: NextPage<Props> = (props) => {
+  const router = useRouter();
+  const [userId, setUserId] = useState("");
+  const [userFav, setUserFav] = useState(false);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    import('@line/liff').then(liff => {
+      liff.init({ liffId: process.env.NEXT_PUBLIC_LIFFID }).then(() => {
+        if(!liff.isLoggedIn()){
+          liff.login({ redirectUri: `${process.env.NEXT_PUBLIC_BASE_URL}/${router.asPath}` })
+        }else{
+          liff.getProfile().then(async (profile: { userId: SetStateAction<string>; }) => {
+            setUserId(profile.userId)
+            getUserFav(profile.userId, props.service_id, setUserFav)
+            console.log(true)
+          });
+        }
+      })
+    });
+  }, []);
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
@@ -243,7 +278,7 @@ const SystemFromId: NextPage<Props> = (props) => {
         src={props.image_url}
         alt="hero"
       />
-      <input type="checkbox" onChange={ doCnange } name={`${props.lineId},${props.service_id}`}></input>
+      <input type="checkbox" onChange={ doCnange } name={`${userId},${props.service_id}`} checked={userFav}></input>
       {props.name ? (
         <h1 className="text-4xl font-bold py-4 mt-4">{props.name}</h1>
       ) : undefined}
