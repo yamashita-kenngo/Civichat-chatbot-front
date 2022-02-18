@@ -6,12 +6,8 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
-<<<<<<< Updated upstream
-import Script from 'next/script'
-=======
 import { SetStateAction, useEffect, useState } from "react";
 import { useRouter } from "next/router";
->>>>>>> Stashed changes
 
 type Props = {
   service_id: string;
