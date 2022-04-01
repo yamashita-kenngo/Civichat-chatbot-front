@@ -33,6 +33,7 @@ type Props = {
   closed_days: string | null;
   playground: string | null;
   ibservation: string | null;
+  bringing_your_own_towel: string | null;
   take_out_diapers: string | null;
   extended_hours_childcare: string | null;
   availability_of_childcare_facilities_for_0: string | null;
@@ -96,9 +97,7 @@ export const getStaticProps: GetStaticProps = async (
     // @ts-ignore
     const urlId = context.params.id;
     const res = await fetch(
-      process.env.APIURL
-        ? `${process.env.APIURL}/info/${urlId}`
-        : `https://r3-gouu-api.civichat.dev/services/${urlId}`,
+      `${process.env.APIURL}/info/${urlId}`,
       {
         method: "GET",
         headers: {
@@ -335,6 +334,13 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold">見学</h2>
           <p className="my-2 mb-5">{props.ibservation}</p>
           <p className="my-2 mb-5">{props.ibservation_detail}</p>
+        </div>
+      ) : undefined}
+
+      {props.bringing_your_own_towel ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">タオルの持ち込み</h2>
+          <p className="my-2 mb-5">{props.bringing_your_own_towel}</p>
         </div>
       ) : undefined}
 
