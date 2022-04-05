@@ -89,19 +89,47 @@ interface LiModel {
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const urlId = context.params.id;
-  await fetch(
-    `${process.env.APIURL}/info/${urlId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+  try {
+    // @ts-ignore
+    const urlId = context.params.id;
+    const res = await fetch(
+      `${process.env.APIURL}/info/${urlId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const SystemFromId = await res.json();
+    const seidoType = SystemFromId.service_id.split("-")[0];
+    let othersType;
+    if (seidoType === "shibuya_preschool") {
+      othersType = "園への";
+    } else if (
+      seidoType === "shibuya_parenting" ||
+      seidoType === "kumamoto_earthquake" ||
+      seidoType === "japan"
+    ) {
+      othersType = "";
+    } else {
+      othersType = "";
     }
-  );
-  return {
-    props: {}
-  };
+    console.log(othersType);
+    return {
+      props: {
+        ...SystemFromId,
+        othersType: othersType,
+        seidoType: seidoType,
+      },
+      revalidate: 86400,
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
@@ -111,7 +139,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (
+/*export const getStaticProps: GetStaticProps = async (
   context: GetStaticPropsContext
 ) => {
   try {
@@ -155,7 +183,7 @@ export const getStaticProps: GetStaticProps = async (
       notFound: true,
     };
   }
-};
+};*/
 
 const unixToDateString = (unixDate: number) => {
   return dayjs.unix(unixDate).format("YYYY/MM/DD");
