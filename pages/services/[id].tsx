@@ -3,6 +3,8 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
   NextPage,
+  GetServerSideProps,
+  GetServerSidePropsContext,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
@@ -82,6 +84,24 @@ type Props = {
 interface LiModel {
   isList: boolean;
   message: string;
+}
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const urlId = context.params.id;
+  await fetch(
+    `${process.env.APIURL}/info/${urlId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return {
+    props: {}
+  };
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
