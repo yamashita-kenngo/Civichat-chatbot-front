@@ -85,7 +85,7 @@ interface LiModel {
   message: string;
 }
 
-export const getServerSideProps: GetServerSideProps = async (
+/*export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   try {
@@ -129,9 +129,9 @@ export const getServerSideProps: GetServerSideProps = async (
       notFound: true,
     };
   }
-}
+}*/
 
-/*export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
     paths: [], //indicates that no page needs be created at build time
     fallback: "blocking", //indicates the type of fallback
@@ -182,7 +182,7 @@ export const getStaticProps: GetStaticProps = async (
       notFound: true,
     };
   }
-};*/
+};
 
 const unixToDateString = (unixDate: number) => {
   return dayjs.unix(unixDate).format("YYYY/MM/DD");
