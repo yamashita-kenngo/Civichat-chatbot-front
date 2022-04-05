@@ -1,5 +1,5 @@
-export default async function handler(req: { params: { id: any; }; }, res: any) {
-  const urlId = req.params.id;
+export default async function handler(req: any, res: any) {
+  const { urlId } = req.query;
   await fetch(
     `${process.env.APIURL}/info/${urlId}`,
     {
