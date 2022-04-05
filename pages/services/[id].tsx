@@ -6,6 +6,7 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 type Props = {
   service_id: string;
@@ -209,6 +210,12 @@ const counterList = (str: string): LiModel[] => {
 };
 
 const SystemFromId: NextPage<Props> = (props) => {
+  useEffect(() => {
+    const fetchCount = async () => {
+      await fetch('/api/count')
+    }
+    fetchCount()
+  },[])
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
