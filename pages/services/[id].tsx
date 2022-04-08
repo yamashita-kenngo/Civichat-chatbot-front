@@ -3,6 +3,8 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
   NextPage,
+  GetServerSideProps,
+  GetServerSidePropsContext,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
@@ -82,6 +84,52 @@ interface LiModel {
   isList: boolean;
   message: string;
 }
+
+/*export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  try {
+    // @ts-ignore
+    const urlId = context.params.id;
+    const res = await fetch(
+      `${process.env.APIURL}/info/${urlId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const SystemFromId = await res.json();
+    const seidoType = SystemFromId.service_id.split("-")[0];
+    let othersType;
+    if (seidoType === "shibuya_preschool") {
+      othersType = "園への";
+    } else if (
+      seidoType === "shibuya_parenting" ||
+      seidoType === "kumamoto_earthquake" ||
+      seidoType === "japan"
+    ) {
+      othersType = "";
+    } else {
+      othersType = "";
+    }
+    console.log(othersType);
+    return {
+      props: {
+        ...SystemFromId,
+        othersType: othersType,
+        seidoType: seidoType,
+      },
+      revalidate: 86400,
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
+}*/
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
@@ -337,12 +385,12 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
-      {props.bringing_your_own_towel ? (
+      {/*props.bringing_your_own_towel ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">タオルの持ち込み</h2>
           <p className="my-2 mb-5">{props.bringing_your_own_towel}</p>
         </div>
-      ) : undefined}
+      ) : undefined*/}
 
       {props.take_out_diapers ? (
         <div>
@@ -389,7 +437,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.availability_of_childcare_facilities_for_0 ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
-          <h4>令和3年10月1日入園分</h4>
+          <h4>令和4年5月1日入園分</h4>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-60 py-2 w-60">0歳児</td>
@@ -438,8 +486,8 @@ const SystemFromId: NextPage<Props> = (props) => {
       props.thisyear_admission_rate_for_4 ||
       props.thisyear_admission_rate_for_5 ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold py-2">前年度までの申込状況</h2>
-          <h3>令和3年度(倍率/最下指数)</h3>
+          <h2 className="mt-3 text-2xl font-bold py-2">直近の申込状況</h2>
+          <h3>令和4年度(倍率/最下指数)</h3>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-40 py-2">0歳児</td>
@@ -538,7 +586,7 @@ const SystemFromId: NextPage<Props> = (props) => {
               </td>
             </tr>
           </table>
-          <h3>令和2年度(倍率/最下指数)</h3>
+          <h3>令和3年度(倍率/最下指数)</h3>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-40 py-2">0歳児</td>
