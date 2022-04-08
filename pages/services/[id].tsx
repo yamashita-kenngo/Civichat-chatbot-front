@@ -3,8 +3,6 @@ import {
   GetStaticProps,
   GetStaticPropsContext,
   NextPage,
-  GetServerSideProps,
-  GetServerSidePropsContext,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import dayjs from "dayjs";
@@ -385,12 +383,12 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
-      {/*props.bringing_your_own_towel ? (
+      {props.bringing_your_own_towel ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold">タオルの持ち込み</h2>
+          <h2 className="mt-3 text-2xl font-bold">お昼寝用バスタオルの持ち込み</h2>
           <p className="my-2 mb-5">{props.bringing_your_own_towel}</p>
         </div>
-      ) : undefined*/}
+      ) : undefined}
 
       {props.take_out_diapers ? (
         <div>
