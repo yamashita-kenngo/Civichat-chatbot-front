@@ -15,14 +15,19 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     import("@line/liff").then((liff) => {
       console.log("start liff.init()...");
       liff
+      // @ts-ignore
         .init({ liffId: process.env.NEXT_PUBLIC_LIFFID })
         .then(() => {
           console.log("liff.init() done");
+          // @ts-ignore
           if (!liff.isLoggedIn()) {
+            // @ts-ignore
             liff.login({ redirectUri: process.env.NEXT_PUBLIC_BASE_URL+router.asPath });
           }
+          // @ts-ignore
           setLiffObject(liff);
         })
+        // @ts-ignore
         .catch((error) => {
           console.log(`liff.init() failed: ${error}`);
           if(!process.env.NEXT_PUBLIC_LIFFID) console.info("LIFF Starter: Please make sure that you provided `LIFF_ID` as an environmental variable.");

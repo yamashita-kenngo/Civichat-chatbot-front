@@ -215,16 +215,21 @@ const sendReq = async (userId: string, serviceId: string) => {
 }
 
 const systemFromId: NextPage<Props> = (props) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [userId, setUserId] = useState('');
   const { liff, liffError } = props;
-  useEffect(async() => {
-    console.log(props)
-    if(props.liff){
-      console.log("liff.ready");
-      const user = await liff.getProfile();
-      setUserId(user.userId);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    async function line() {
+      console.log(props)
+      if(props.liff){
+        console.log("liff.ready");
+        const user = await liff.getProfile();
+        setUserId(user.userId);
+      }
     }
-  }, [props.liff]);
+    line();
+  }, [liff, props, props.liff]);
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
