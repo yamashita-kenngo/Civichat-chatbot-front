@@ -5,7 +5,8 @@ import {
   NextPage,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
-import dayjs from "dayjs";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 type Props = {
   service_id: string;
@@ -76,58 +77,14 @@ type Props = {
   othersType: string | null;
   hours_childcare: string | null;
   seidoType: string;
+  liff: any;
+  liffError: any;
 };
 
 interface LiModel {
   isList: boolean;
   message: string;
 }
-
-/*export const getServerSideProps: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  try {
-    // @ts-ignore
-    const urlId = context.params.id;
-    const res = await fetch(
-      `${process.env.APIURL}/info/${urlId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const SystemFromId = await res.json();
-    const seidoType = SystemFromId.service_id.split("-")[0];
-    let othersType;
-    if (seidoType === "shibuya_preschool") {
-      othersType = "園への";
-    } else if (
-      seidoType === "shibuya_parenting" ||
-      seidoType === "kumamoto_earthquake" ||
-      seidoType === "japan"
-    ) {
-      othersType = "";
-    } else {
-      othersType = "";
-    }
-    console.log(othersType);
-    return {
-      props: {
-        ...SystemFromId,
-        othersType: othersType,
-        seidoType: seidoType,
-      },
-      revalidate: 86400,
-    };
-  } catch (e) {
-    return {
-      notFound: true,
-    };
-  }
-}*/
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
@@ -152,8 +109,8 @@ export const getStaticProps: GetStaticProps = async (
       }
     );
 
-    const SystemFromId = await res.json();
-    const seidoType = SystemFromId.service_id.split("-")[0];
+    const systemFromId = await res.json();
+    const seidoType = systemFromId.service_id.split("-")[0];
     let othersType;
     if (seidoType === "shibuya_preschool") {
       othersType = "園への";
@@ -169,7 +126,7 @@ export const getStaticProps: GetStaticProps = async (
     console.log(othersType);
     return {
       props: {
-        ...SystemFromId,
+        ...systemFromId,
         othersType: othersType,
         seidoType: seidoType,
       },
@@ -180,10 +137,6 @@ export const getStaticProps: GetStaticProps = async (
       notFound: true,
     };
   }
-};
-
-const unixToDateString = (unixDate: number) => {
-  return dayjs.unix(unixDate).format("YYYY/MM/DD");
 };
 
 const needsTestList = (str: string): LiModel[] => {
@@ -227,6 +180,7 @@ const needsTestList = (str: string): LiModel[] => {
   });
   return returnList;
 };
+
 const removeNewLineCode = (content: string | null): string => {
   if (content) {
     return content.replace(/\\n/g, "");
@@ -234,27 +188,43 @@ const removeNewLineCode = (content: string | null): string => {
   return "";
 };
 
-const counterList = (str: string): LiModel[] => {
-  if (!str.startsWith("・")) {
-    return str.split("・").map((value, index) => {
-      return {
-        isList: Boolean(index),
-        message: value,
-      };
-    });
-  }
-  return str
-    .slice(1)
-    .split("・")
-    .map((value) => {
-      return {
-        isList: true,
-        message: value,
-      };
-    });
-};
+const sendReq = async (userId: string, serviceId: string) => {
+  fetch(process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/create', {
+    method: "POST",
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      serviceId: serviceId,
+      userId: userId,
+      amount: 100,
+    })
+  })
+  .then(response => {
+    if(response.status === 200){
+      return response.json()
+    }else{
+      console.warn('Something went wrong on api server!');
+      return response
+    }
+  })
+  .then(json => {
+    location.href=process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/reserve?orderId='+json.orderId
+  })
+}
 
-const SystemFromId: NextPage<Props> = (props) => {
+const systemFromId: NextPage<Props> = (props) => {
+  const [userId, setUserId] = useState('');
+  const { liff, liffError } = props;
+  useEffect(async() => {
+    console.log(props)
+    if(props.liff){
+      console.log("liff.ready");
+      const user = await liff.getProfile();
+      setUserId(user.userId);
+    }
+  }, [props.liff]);
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
@@ -788,6 +758,13 @@ const SystemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       )}
+      {props.seidoType === "shibuya_parenting" ? (
+        <button onClick={async()=>{
+          sendReq(userId, props.service_id)
+        }} className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+          申請代行を申し込む(有料)
+        </button>
+      ) : undefined}
 
       {props.othersType === "園への" ? (
         <div>
@@ -813,4 +790,4 @@ const SystemFromId: NextPage<Props> = (props) => {
     </div>
   );
 };
-export default SystemFromId;
+export default systemFromId;
