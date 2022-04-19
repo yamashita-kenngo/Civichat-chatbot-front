@@ -109,14 +109,6 @@ export const getStaticProps: GetStaticProps = async (
       }
     );
 
-    // 決済サーバを叩き起こす
-    await fetch(
-      `${process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL}/startup`,
-      {
-        method: "GET"
-      }
-    );
-
     const systemFromId = await res.json();
     const seidoType = systemFromId.service_id.split("-")[0];
     let othersType;
