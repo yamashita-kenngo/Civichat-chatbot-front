@@ -78,6 +78,7 @@ type Props = {
   seidoType: string;
   liff: any;
   liffError: any;
+  civichat_price: number | null;
 };
 
 interface LiModel {
@@ -190,6 +191,19 @@ const removeNewLineCode = (content: string | null): string => {
 const sendReq = async (userId: string, serviceId: string) => {
   // @ts-ignore
   document.getElementById('payment_button').innerText = '処理中...';
+
+  const res = await fetch(
+    `${process.env.APIURL}/info/${serviceId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const price = await res.json();
+
   fetch(process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/create', {
     method: "POST",
     mode: 'cors',
@@ -199,7 +213,7 @@ const sendReq = async (userId: string, serviceId: string) => {
     body: JSON.stringify({
       serviceId: serviceId,
       userId: userId,
-      amount: 100,
+      amount: price.civichat_price,
     })
   })
   .then(response => {
@@ -764,7 +778,7 @@ const systemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       )}
-      {props.seidoType === "shibuya_parenting" ? (
+      {props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
         <button onClick={async()=>{
           sendReq(userId, props.service_id)
         }} className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow"
