@@ -109,6 +109,14 @@ export const getStaticProps: GetStaticProps = async (
       }
     );
 
+    // 決済サーバを叩き起こす
+    await fetch(
+      `${process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL}/startup`,
+      {
+        method: "GET"
+      }
+    );
+
     const systemFromId = await res.json();
     const seidoType = systemFromId.service_id.split("-")[0];
     let othersType;
@@ -192,18 +200,6 @@ const sendReq = async (userId: string, serviceId: string) => {
   // @ts-ignore
   document.getElementById('payment_button').innerText = '処理中...';
 
-  const res = await fetch(
-    `${process.env.APIURL}/info/${serviceId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-
-  const price = await res.json();
-
   fetch(process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/create', {
     method: "POST",
     mode: 'cors',
@@ -212,8 +208,7 @@ const sendReq = async (userId: string, serviceId: string) => {
     },
     body: JSON.stringify({
       serviceId: serviceId,
-      userId: userId,
-      amount: price.civichat_price,
+      userId: userId
     })
   })
   .then(response => {
