@@ -16,12 +16,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       console.log("start liff.init()...");
       liff
       // @ts-ignore
-        .init({ liffId: process.env.NEXT_PUBLIC_LIFFID })
-        .then(() => {
-          console.log("liff.init() done");
+      .init({ liffId: process.env.NEXT_PUBLIC_LIFFID })
+      .then(() => {
+        console.log("liff.init() done");
+        // @ts-ignore
+        if (!liff.isLoggedIn()) {
           // @ts-ignore
-          if (!liff.isLoggedIn()) {
-            // @ts-ignore
             liff.login({ redirectUri: process.env.NEXT_PUBLIC_BASE_URL+router.asPath });
           }
           // @ts-ignore

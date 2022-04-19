@@ -6,7 +6,6 @@ import {
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 type Props = {
   service_id: string;
@@ -189,6 +188,8 @@ const removeNewLineCode = (content: string | null): string => {
 };
 
 const sendReq = async (userId: string, serviceId: string) => {
+  // @ts-ignore
+  document.getElementById('payment_button').innerText = '処理中...';
   fetch(process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/create', {
     method: "POST",
     mode: 'cors',
@@ -766,7 +767,8 @@ const systemFromId: NextPage<Props> = (props) => {
       {props.seidoType === "shibuya_parenting" ? (
         <button onClick={async()=>{
           sendReq(userId, props.service_id)
-        }} className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow">
+        }} className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow"
+          id="payment_button">
           申請代行を申し込む(有料)
         </button>
       ) : undefined}
