@@ -12,6 +12,7 @@ type Props = {
   name: string;
   overview: string | null;
   area: string | null;
+  amount: string | null;
   target: string | null;
   detail_url: string | null;
   organization: string | null;
@@ -254,6 +255,12 @@ const systemFromId: NextPage<Props> = (props) => {
           <tr>
             <td className="text-gray-500 w-2/5 py-2">対象者</td>
             <td className=" ">{props.target}</td>
+          </tr>
+        ) : undefined}
+        {props.amount !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-2/5 py-2">支援額（想定）</td>
+            <td className=" ">{props.amount}</td>
           </tr>
         ) : undefined}
         {props.abstract !== undefined ? (
