@@ -773,12 +773,15 @@ const systemFromId: NextPage<Props> = (props) => {
         </div>
       )}
       {props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
-        <button onClick={async()=>{
-          sendReq(userId, props.service_id)
-        }} className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 mb-5 shadow"
-          id="payment_button">
-          申請代行を申し込む(有料)
-        </button>
+        <div className="w-full px-2">
+          <button onClick={async () => {
+            sendReq(userId, props.service_id);
+          } } className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 shadow"
+            id="payment_button">
+            申請代行を申し込む(有料)
+          </button>
+          <p className="mb-10">決済完了後表示されるGoogleフォームにて情報の入力をお願いいたします。</p>
+        </div>
       ) : undefined}
 
       {props.othersType === "園への" ? (

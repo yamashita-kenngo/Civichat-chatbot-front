@@ -3,6 +3,7 @@ import Head from 'next/head'
 import '../styles/global.scss'
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
+import { GA_TRACKING_ID, pageview } from '../src/lib/gtag';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [liffObject, setLiffObject] = useState(null);
@@ -34,7 +35,17 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           setLiffError(error.toString());
         });
     });
-  }, []);
+    // GA_TRACKING_ID が設定されていない場合は、処理終了
+    if (!GA_TRACKING_ID) return;
+
+    const handleRouteChange = (url: string) => {
+      pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   // Provide `liff` object and `liffError` object
   // to page component as property
