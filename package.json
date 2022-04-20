@@ -1,6 +1,6 @@
 {
-  "name": "civichat-atami-front",
-  "version": "0.1.0",
+  "name": "civichat-chatbot-front",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next",
