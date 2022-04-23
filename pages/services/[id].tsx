@@ -5,13 +5,14 @@ import {
   NextPage,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
-import dayjs from "dayjs";
+import { useState, useEffect } from "react";
 
 type Props = {
   service_id: string;
   name: string;
   overview: string | null;
   area: string | null;
+  amount: string | null;
   target: string | null;
   detail_url: string | null;
   organization: string | null;
@@ -33,6 +34,7 @@ type Props = {
   closed_days: string | null;
   playground: string | null;
   ibservation: string | null;
+  bringing_your_own_towel: string | null;
   take_out_diapers: string | null;
   extended_hours_childcare: string | null;
   availability_of_childcare_facilities_for_0: string | null;
@@ -73,6 +75,11 @@ type Props = {
   parking: string | null;
   baby_buggy: string | null;
   othersType: string | null;
+  hours_childcare: string | null;
+  seidoType: string;
+  liff: any;
+  liffError: any;
+  civichat_price: number | null;
 };
 
 interface LiModel {
@@ -94,9 +101,7 @@ export const getStaticProps: GetStaticProps = async (
     // @ts-ignore
     const urlId = context.params.id;
     const res = await fetch(
-      process.env.APIURL
-        ? `${process.env.APIURL}/info/${urlId}`
-        : `https://r3-gouu-api.civichat.dev/services/${urlId}`,
+      `${process.env.APIURL}/info/${urlId}`,
       {
         method: "GET",
         headers: {
@@ -105,14 +110,15 @@ export const getStaticProps: GetStaticProps = async (
       }
     );
 
-    const SystemFromId = await res.json();
-    const seidoType = SystemFromId.service_id.split("-")[0];
+    const systemFromId = await res.json();
+    const seidoType = systemFromId.service_id.split("-")[0];
     let othersType;
     if (seidoType === "shibuya_preschool") {
       othersType = "園への";
     } else if (
       seidoType === "shibuya_parenting" ||
-      seidoType === "kumamoto_earthquake"
+      seidoType === "kumamoto_earthquake" ||
+      seidoType === "japan"
     ) {
       othersType = "";
     } else {
@@ -120,7 +126,11 @@ export const getStaticProps: GetStaticProps = async (
     }
     console.log(othersType);
     return {
-      props: { ...SystemFromId, othersType: othersType },
+      props: {
+        ...systemFromId,
+        othersType: othersType,
+        seidoType: seidoType,
+      },
       revalidate: 86400,
     };
   } catch (e) {
@@ -128,10 +138,6 @@ export const getStaticProps: GetStaticProps = async (
       notFound: true,
     };
   }
-};
-
-const unixToDateString = (unixDate: number) => {
-  return dayjs.unix(unixDate).format("YYYY/MM/DD");
 };
 
 const needsTestList = (str: string): LiModel[] => {
@@ -175,6 +181,7 @@ const needsTestList = (str: string): LiModel[] => {
   });
   return returnList;
 };
+
 const removeNewLineCode = (content: string | null): string => {
   if (content) {
     return content.replace(/\\n/g, "");
@@ -182,27 +189,50 @@ const removeNewLineCode = (content: string | null): string => {
   return "";
 };
 
-const counterList = (str: string): LiModel[] => {
-  if (!str.startsWith("・")) {
-    return str.split("・").map((value, index) => {
-      return {
-        isList: Boolean(index),
-        message: value,
-      };
-    });
-  }
-  return str
-    .slice(1)
-    .split("・")
-    .map((value) => {
-      return {
-        isList: true,
-        message: value,
-      };
-    });
-};
+const sendReq = async (userId: string, serviceId: string) => {
+  // @ts-ignore
+  document.getElementById('payment_button').innerText = '処理中...';
 
-const SystemFromId: NextPage<Props> = (props) => {
+  fetch(process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/create', {
+    method: "POST",
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      serviceId: serviceId,
+      userId: userId
+    })
+  })
+  .then(response => {
+    if(response.status === 200){
+      return response.json()
+    }else{
+      console.warn('Something went wrong on api server!');
+      return response
+    }
+  })
+  .then(json => {
+    location.href=process.env.NEXT_PUBLIC_PAYMENT_GATEWAY_URL+'/pay/reserve?orderId='+json.orderId
+  })
+}
+
+const systemFromId: NextPage<Props> = (props) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [userId, setUserId] = useState('');
+  const { liff, liffError } = props;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    async function line() {
+      console.log(props)
+      if(props.liff){
+        console.log("liff.ready");
+        const user = await liff.getProfile();
+        setUserId(user.userId);
+      }
+    }
+    line();
+  }, [liff, props, props.liff]);
   return (
     <div className="px-5 mt-10 items-center">
       <HeadMeta
@@ -225,6 +255,12 @@ const SystemFromId: NextPage<Props> = (props) => {
           <tr>
             <td className="text-gray-500 w-2/5 py-2">対象者</td>
             <td className=" ">{props.target}</td>
+          </tr>
+        ) : undefined}
+        {props.amount !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-2/5 py-2">支援額（想定）</td>
+            <td className=" ">{props.amount}</td>
           </tr>
         ) : undefined}
         {props.abstract !== undefined ? (
@@ -331,10 +367,24 @@ const SystemFromId: NextPage<Props> = (props) => {
         </div>
       ) : undefined}
 
+      {props.bringing_your_own_towel ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">お昼寝用バスタオルの持ち込み</h2>
+          <p className="my-2 mb-5">{props.bringing_your_own_towel}</p>
+        </div>
+      ) : undefined}
+
       {props.take_out_diapers ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">おむつの持ち帰り</h2>
           <p className="my-2 mb-5">{props.take_out_diapers}</p>
+        </div>
+      ) : undefined}
+
+      {props.hours_childcare ? (
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">通常保育の対応時間</h2>
+          <p className="my-2 mb-5">{props.hours_childcare}</p>
         </div>
       ) : undefined}
 
@@ -369,7 +419,7 @@ const SystemFromId: NextPage<Props> = (props) => {
       {props.availability_of_childcare_facilities_for_0 ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold py-2">保育施設の空き状況</h2>
-          <h4>令和3年10月1日入園分</h4>
+          <h4>令和4年5月1日入園分</h4>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-60 py-2 w-60">0歳児</td>
@@ -418,8 +468,8 @@ const SystemFromId: NextPage<Props> = (props) => {
       props.thisyear_admission_rate_for_4 ||
       props.thisyear_admission_rate_for_5 ? (
         <div>
-          <h2 className="mt-3 text-2xl font-bold py-2">前年度までの申込状況</h2>
-          <h3>令和3年度(倍率/最下指数)</h3>
+          <h2 className="mt-3 text-2xl font-bold py-2">直近の申込状況</h2>
+          <h3>令和4年度(倍率/最下指数)</h3>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-40 py-2">0歳児</td>
@@ -518,7 +568,7 @@ const SystemFromId: NextPage<Props> = (props) => {
               </td>
             </tr>
           </table>
-          <h3>令和2年度(倍率/最下指数)</h3>
+          <h3>令和3年度(倍率/最下指数)</h3>
           <table className="py-2 border-collapse">
             <tr>
               <td className="text-gray-500 w-40 py-2">0歳児</td>
@@ -619,7 +669,7 @@ const SystemFromId: NextPage<Props> = (props) => {
           </table>
         </div>
       ) : undefined}
-        
+
       {props.apply ? (
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
@@ -632,9 +682,17 @@ const SystemFromId: NextPage<Props> = (props) => {
           <h2 className="mt-3 text-2xl font-bold">
             {props.othersType}お問い合わせ
           </h2>
-          <a href={`tel:${props.contact}`}>
-            <td className="py-2">{props.contact}</td>
-          </a>
+          {props.seidoType === "shibuya_preschool" ? (
+            <a href={`tel:${props.contact}`}>
+              <td className="py-2">{props.contact}</td>
+            </a>
+          ) : (
+            props.seidoType === "kumamoto_earthquake") ? (
+              <td className="py-2">{props.contact}</td>
+            ) : (
+              <td className="py-2">{props.contact?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
+            )
+          }
         </div>
       ) : undefined}
 
@@ -714,6 +772,17 @@ const SystemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       )}
+      {/*props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
+        <div className="w-full px-2">
+          <button onClick={async () => {
+            sendReq(userId, props.service_id);
+          } } className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 shadow"
+            id="payment_button">
+            申請代行を申し込む(有料)
+          </button>
+          <p className="mb-10">決済完了後表示されるGoogleフォームにて情報の入力をお願いいたします。</p>
+        </div>
+        ) : undefined*/}
 
       {props.othersType === "園への" ? (
         <div>
@@ -739,4 +808,4 @@ const SystemFromId: NextPage<Props> = (props) => {
     </div>
   );
 };
-export default SystemFromId;
+export default systemFromId;
