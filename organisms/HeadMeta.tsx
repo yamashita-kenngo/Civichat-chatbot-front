@@ -11,7 +11,7 @@ type Props = {
 
 const HeadMeta: FC<Props> = ({ title, description, ogpImage, path, isTop }) => (
   <Head>
-    <title>Civichat</title>
+    <title>Civichat - {title}</title>
     <meta property="og:title" content={title ? title : 'Civichat'} />
     <meta property="description" content={description ? description : 'Civichat'} />
     <meta property="og:description" content={description ? description : 'Civichat'} />
