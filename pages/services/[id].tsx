@@ -772,7 +772,7 @@ const systemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       )}
-      {props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
+      {/*props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
         <div className="w-full px-2">
           <button onClick={async () => {
             sendReq(userId, props.service_id);
@@ -782,7 +782,7 @@ const systemFromId: NextPage<Props> = (props) => {
           </button>
           <p className="mb-10">決済完了後表示されるGoogleフォームにて情報の入力をお願いいたします。</p>
         </div>
-      ) : undefined}
+        ) : undefined*/}
 
       {props.othersType === "園への" ? (
         <div>
