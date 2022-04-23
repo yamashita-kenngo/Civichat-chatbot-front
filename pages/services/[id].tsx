@@ -250,13 +250,10 @@ const systemFromId: NextPage<Props> = (props) => {
       {props.name ? (
         <h1 className="text-4xl font-bold py-4 mt-4">{props.name}</h1>
       ) : undefined}
+      {props.abstract !== undefined ? (
+        <p className="py-2">{props.abstract}</p>
+      ) : undefined}
       <table className="py-2 border-collapse">
-        {props.abstract !== undefined ? (
-          <tr>
-            <td className="text-gray-500 w-35 py-2">概要</td>
-            <td className="py-2">{props.abstract}</td>
-          </tr>
-        ) : undefined}
         {props.target !== undefined ? (
           <tr>
             <td className="text-gray-500 w-2/5 py-2">対象者</td>
