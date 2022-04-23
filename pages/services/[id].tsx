@@ -251,6 +251,12 @@ const systemFromId: NextPage<Props> = (props) => {
         <h1 className="text-4xl font-bold py-4 mt-4">{props.name}</h1>
       ) : undefined}
       <table className="py-2 border-collapse">
+        {props.abstract !== undefined ? (
+          <tr>
+            <td className="text-gray-500 w-35 py-2">概要</td>
+            <td className="py-2">{props.abstract}</td>
+          </tr>
+        ) : undefined}
         {props.target !== undefined ? (
           <tr>
             <td className="text-gray-500 w-2/5 py-2">対象者</td>
@@ -261,12 +267,6 @@ const systemFromId: NextPage<Props> = (props) => {
           <tr>
             <td className="text-gray-500 w-2/5 py-2">支援額（想定）</td>
             <td className=" ">{props.amount}</td>
-          </tr>
-        ) : undefined}
-        {props.abstract !== undefined ? (
-          <tr>
-            <td className="text-gray-500 w-35 py-2">概要</td>
-            <td className="py-2">{props.abstract}</td>
           </tr>
         ) : undefined}
         {props.issue_type !== undefined ? (
