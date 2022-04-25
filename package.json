@@ -3,10 +3,10 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export"
+    "dev": "npx next",
+    "build": "npx next build",
+    "start": "npx next start",
+    "export": "npx next export"
   },
   "dependencies": {
     "@line/liff": "^2.19.0",
