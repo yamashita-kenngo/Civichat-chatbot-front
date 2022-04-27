@@ -14,6 +14,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   // Execute liff.init() when the app is initialized
   useEffect(() => {
     // to avoid `window is not defined` error
+    // @ts-ignore
     import("tw-elements")
     import("@line/liff").then((liff) => {
       console.log("start liff.init()...");

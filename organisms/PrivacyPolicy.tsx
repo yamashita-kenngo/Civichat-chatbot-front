@@ -5,8 +5,8 @@ const PrivacyPolicy: FC = () => (
     <div className="columns__main">
       <div className="privacy">
         <h1 className="privacy__title">The Juro Privacy Policy</h1>
-        <p className="privacy__textual">Hello. We are Juro Online Limited (known by humans as Juro). Here's
-          how we protect your data and respect your privacy. We've open-sourced this policy - get the
+        <p className="privacy__textual">Hello. We are Juro Online Limited (known by humans as Juro). Here&apos;s
+          how we protect your data and respect your privacy. We&apos;ve open-sourced this policy - get the
           free privacy policy template.
         </p>
         {/* privacy content blocks start */}
@@ -220,7 +220,7 @@ const PrivacyPolicy: FC = () => (
                   </span>
                   <div>
                     <h3 className="data-collect__title">What about really sensitive data?</h3>
-                    <p>We don’t collect any "sensitive data" about you (like racial or
+                    <p>We don’t collect any &quot;sensitive data&quot; about you (like racial or
                       ethnic origin, political opinions, religious/philosophical beliefs,
                       trade union membership, genetic data, biometric data, health data,
                       data
@@ -315,7 +315,7 @@ const PrivacyPolicy: FC = () => (
             <div className="data-collect">
               <div className="data-collect__item">
                 <div>
-                  <h3 className="data-collect__title">Here is what each of these "legal bases"
+                  <h3 className="data-collect__title">Here is what each of these &quot;legal bases&quot;
                     mean:
                   </h3>
                 </div>
