@@ -7,6 +7,7 @@ import {
 import HeadMeta from "../../organisms/HeadMeta";
 import PrivacyPolicy from "../../organisms/PrivacyPolicy";
 import { useState, useEffect } from "react";
+import { GA_TRACKING_ID, setUserId } from '../../src/lib/gtag';
 
 type Props = {
   service_id: string;
@@ -230,6 +231,7 @@ const systemFromId: NextPage<Props> = (props) => {
         console.log("liff.ready");
         const user = await liff.getProfile();
         setUserId(user.userId);
+        if(GA_TRACKING_ID) setUserId(user.userId);
       }
     }
     line();
