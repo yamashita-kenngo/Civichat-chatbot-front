@@ -797,6 +797,7 @@ const systemFromId: NextPage<Props> = (props) => {
                       <p className="w-full text-lg">Googleフォームに情報を入力することで、専用のロボットがお客様に代わって書類を記述します。<br/>お申込みいただくと、申請サポートキットがお手元に届き、申請が最短10分で完了します。</p>
                     </div>
                     <img className="w-80 h-80" src="/daiko1.png" alt=""/>
+                    <img className="w-80 h-80" src="/daiko2.png" alt=""/>
                     <div className="flex flex-col space-y-4 items-start justify-start w-80">
                       <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
                         <p className="w-5/6 text-xl font-bold">電子証明書発行省</p>
