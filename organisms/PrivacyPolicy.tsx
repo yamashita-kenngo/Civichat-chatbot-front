@@ -23,12 +23,12 @@ const PrivacyPolicy: FC = () => (
                   <div className="data-scheme__top-left"> <svg className="icon icon-data-you">
                       <use href="/sprite.svg#icon-data-you"></use>
                     </svg>
-                    <p>DATA YOU GIVE</p>
+                    <p>あなたが入力するデータ</p>
                   </div>
                   <div className="data-scheme__top-right"> <svg className="icon icon-data-we">
                       <use href="/sprite.svg#icon-data-we"></use>
                     </svg>
-                    <p>DATA WE COLLECT</p>
+                    <p>Civichatが集めるデータ</p>
                   </div>
                 </div>
                 <div className="data-scheme__wrap">
@@ -196,63 +196,56 @@ const PrivacyPolicy: FC = () => (
                 <tbody>
                   <tr>
                     <td data-label="サービス提供者">
-                      <p>Google Analytics</p> <a href="https://www.google.com/policies/privacy/">(Privacy
-                        policy)</a>
+                      <p>Google</p> <a href="https://www.google.com/policies/privacy/">(プライバシーポリシー)</a>
                     </td>
                     <td data-label="扱うデータ">
                       <ul>
                         <li>どのようにしてCivichatを利用しているか</li>
                         <li>あなたを識別できる情報</li>
-                        <li>Cookie</li>
+                        <li>「申請サポート」機能を提供するのに必要な情報</li>
                       </ul>
                     </td>
                     <td data-label="目的">
-                      <p>GoogleAnalytics はWebの分析ツールです: 利用状況や活動などを把握するために使います。
+                      <p>利用状況や活動などを把握するためにGoogleアナリティクスを、申請サポート機能のデータを収集するためにGoogleフォームを利用します。
                       </p>
                     </td>
                     <td data-label="データ処理を行う場所">
-                      <p>US</p>
+                      <p>アメリカ</p>
                     </td>
                   </tr>
                   <tr>
                     <td data-label="サービス提供者">
-                      <p>AWS</p> <a href="https://heapanalytics.com/privacy">(Privacy policy)</a>
+                      <p>AWS</p> <a href="https://aws.amazon.com/jp/compliance/japan-data-privacy/">(プライバシーポリシー)</a>
                     </td>
                     <td data-label="扱うデータ">
                       <ul>
-                        <li>Data on how you use Juro</li>
-                        <li>How you use Juro</li>
-                        <li>Cookies</li>
+                        <li>推薦する制度データ</li>
+                        <li>制度推薦のための回答データ</li>
                       </ul>
                     </td>
                     <td data-label="目的">
-                      <p>This is a web analytics service: we use it to track your use of
-                        the service, and prepare reports on user activity .</p>
+                      <p>インフラストラクチャーとして、Webシステムの根底になるものです。主に制度データを保存し、推薦するためのシステムが動作する場所です。</p>
                     </td>
                     <td data-label="データ処理を行う場所">
-                      <p>US</p>
+                      <p>日本</p>
                     </td>
                   </tr>
                   <tr>
-                    <td data-label="サービス提供者">
-                      <p>LINE</p> <a href="https://mixpanel.com/legal/privacy-policy/">(Privacy
-                        policy)</a>
-                    </td>
-                    <td data-label="扱うデータ">
-                      <ul>
-                        <li>Data on how you use Juro</li>
-                        <li>How you use Juro</li>
-                        <li>Cookies</li>
-                      </ul>
-                    </td>
-                    <td data-label="目的">
-                      <p>This is a web analytics service: we use it to track your use of
-                        the service, and prepare reports on user activity .</p>
-                    </td>
-                    <td data-label="データ処理を行う場所">
-                      <p>US</p>
-                    </td>
-                  </tr>
+                  <td data-label="サービス提供者">
+                    <p>LINE</p> <a href="https://line.me/ja/terms/policy/">(プライバシーポリシー)</a>
+                  </td>
+                  <td data-label="扱うデータ">
+                    <ul>
+                      <li>どのようにしてCivichatを利用しているか</li>
+                    </ul>
+                  </td>
+                  <td data-label="目的">
+                    <p>制度診断システムを利用するためのインターフェースとしてLINEを利用しています。</p>
+                  </td>
+                  <td data-label="データ処理を行う場所">
+                    <p>日本</p>
+                  </td>
+                </tr>
                 </tbody>
               </table>
             </div>
