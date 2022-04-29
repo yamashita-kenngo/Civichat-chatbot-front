@@ -813,7 +813,7 @@ const systemFromId: NextPage<Props> = (props) => {
                       </div>
                     </div>
                     <p className="text-4xl font-bold">対応制度</p>
-                    <div className="flex flex-col space-y-5 items-start justify-start">
+                    <div className="inline-flex flex-col space-y-5 items-start justify-start">
                       <div className="w-full h-60">
                         <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-6 bg-white border rounded-2xl border-black">
                           <div className="w-1/6 h-12">
