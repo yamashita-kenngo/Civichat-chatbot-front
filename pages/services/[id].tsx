@@ -796,9 +796,10 @@ const systemFromId: NextPage<Props> = (props) => {
                       <p className="w-full h-20 text-4xl font-bold">制度の申請に必要な書類入力をサポート</p>
                       <p className="w-full text-lg">Googleフォームに情報を入力することで、専用のロボットがお客様に代わって書類を記述します。<br/>お申込みいただくと、申請サポートキットがお手元に届き、申請が最短10分で完了します。</p>
                     </div>
-                    <img className="w-80 h-80" src="/daiko1.png" alt=""/>
-                    <img className="w-80" src="/daiko2.png" alt=""/>
-                    <div className="flex flex-col space-y-4 items-start justify-start w-80">
+                    <img src="/daiko1.png" alt=""/>
+                    <img src="/daiko2.png" alt=""/>
+                    <img src="/daiko3.png" alt=""/>
+                    {/*<div className="flex flex-col space-y-4 items-start justify-start w-80">
                       <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
                         <p className="w-5/6 text-xl font-bold">記入済みの申請用紙</p>
                         <p className="w-full text-sm">フォームに入力した申請内容は全て印字されているので、そのまま申請可能です</p>
@@ -811,16 +812,13 @@ const systemFromId: NextPage<Props> = (props) => {
                         <p className="w-5/6 text-xl font-bold">送信用封筒</p>
                         <p className="w-full text-sm">宛先等が既に記入された送信用の封筒を同封します。80円切手が既に貼られているので、切手を買う手間も削減できます。</p>
                       </div>
-                    </div>
+                    </div>*/}
                     <p className="text-4xl font-bold">対応制度</p>
-                    <div className="inline-flex flex-col space-y-5 items-start justify-start">
+                    <img src="/daiko4.png" alt=""/>
+                    <img src="/daiko5.png" alt=""/>
+                    {/*<div className="inline-flex flex-col space-y-5 items-start justify-start">
                       <div className="w-full h-60">
                         <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-6 bg-white border rounded-2xl border-black">
-                          <div className="w-1/6 h-12">
-                            <div className="flex items-center justify-center flex-1 h-full px-3 pt-3.5 pb-3 bg-gray-300">
-                              <img className="flex-1 h-full" src="https://via.placeholder.com/24x24" alt=""/>
-                            </div>
-                          </div>
                           <div className="flex flex-col space-y-5 items-center justify-end w-full h-24">
                             <p className="w-full text-xl font-bold">ハッピーマザー出産助成金</p>
                             <p className="w-full text-base">出産時の経済的負担の軽減を図り、安心して出産ができるよう、出産した人にハッピーマザー出産助成金を支給します。</p>
@@ -829,11 +827,6 @@ const systemFromId: NextPage<Props> = (props) => {
                       </div>
                       <div className="w-full h-60">
                         <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-8 bg-white border rounded-2xl border-black">
-                          <div className="w-1/6 h-12">
-                            <div className="flex items-center justify-center flex-1 h-full px-3 pt-3.5 pb-3 bg-gray-300">
-                              <img className="flex-1 h-full" src="https://via.placeholder.com/24x24" alt=""/>
-                            </div>
-                          </div>
                           <div className="flex flex-col space-y-7 items-center justify-end w-full h-20">
                             <p className="w-full text-xl font-bold">児童手当</p>
                             <p className="w-full text-base">子育て世帯に対して、養育されている子どものために支給される手当です。</p>
@@ -842,11 +835,6 @@ const systemFromId: NextPage<Props> = (props) => {
                       </div>
                       <div className="w-full h-1/3">
                         <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-5 bg-white border rounded-2xl border-black">
-                          <div className="w-1/6 h-1/4">
-                            <div className="flex items-center justify-center flex-1 h-full px-3 pt-3.5 pb-3 bg-gray-300">
-                              <img className="flex-1 h-full" src="https://via.placeholder.com/24x24" alt=""/>
-                            </div>
-                          </div>
                           <div className="flex flex-col space-y-5 items-center justify-end w-full h-32">
                             <p className="w-full text-xl font-bold">病児・病後児保育利用料金助成</p>
                             <p className="w-full text-base">お子さんが病気やケガで保育施設に登園できない場合、仕事があるなどの理由で、ご自宅でベビーシッターなどのサービスを利用した時に、その料金の一部を区が助成する制度です。</p>
@@ -858,11 +846,11 @@ const systemFromId: NextPage<Props> = (props) => {
                       <div className="flex items-start justify-center flex-1 h-full px-3 pt-7 pb-9 bg-primary">
                         <div className="inline-flex flex-col space-y-6 items-start justify-start">
                           <p className="text-3xl font-bold text-white">利用料金</p>
-                          <p className="w-full text-2xl text-white">「申請サポート」プラン 500円(税込)</p>
+                          <p className="w-full text-xl text-white">「申請サポート」プラン 500円(税込)</p>
                           <p className="w-full text-base text-white">※80円切手代込み</p>
                         </div>
                       </div>
-                    </div>
+                    </div>*/}
                   </div>
                   <PrivacyPolicy />
                 </div>
