@@ -800,16 +800,16 @@ const systemFromId: NextPage<Props> = (props) => {
                     <img className="w-80" src="/daiko2.png" alt=""/>
                     <div className="flex flex-col space-y-4 items-start justify-start w-80">
                       <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
-                        <p className="w-5/6 text-xl font-bold">電子証明書発行省</p>
-                        <p className="w-full text-sm">申請内容は全て印字されています。あとは付箋が貼ってある場所に押印するだけ</p>
+                        <p className="w-5/6 text-xl font-bold">記入済みの申請用紙</p>
+                        <p className="w-full text-sm">フォームに入力した申請内容は全て印字されているので、そのまま申請可能です</p>
                       </div>
                       <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
-                        <p className="w-5/6 text-xl font-bold">電子証明書発行省</p>
-                        <p className="w-full text-sm">申請内容は全て印字されています。あとは付箋が貼ってある場所に押印するだけ</p>
+                        <p className="w-5/6 text-xl font-bold">申請サポートキット</p>
+                        <p className="w-full text-sm">Civichatの「申請サポート」機能を利用する一連の流れをパンフレットでご紹介</p>
                       </div>
                       <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
-                        <p className="w-5/6 text-xl font-bold">電子証明書発行省</p>
-                        <p className="w-full text-sm">申請内容は全て印字されています。あとは付箋が貼ってある場所に押印するだけ</p>
+                        <p className="w-5/6 text-xl font-bold">送信用封筒</p>
+                        <p className="w-full text-sm">宛先等が既に記入された送信用の封筒を同封します。80円切手が既に貼られているので、切手を買う手間も削減できます。</p>
                       </div>
                     </div>
                     <p className="text-4xl font-bold">対応制度</p>
@@ -858,8 +858,8 @@ const systemFromId: NextPage<Props> = (props) => {
                       <div className="flex items-start justify-center flex-1 h-full px-3 pt-7 pb-9 bg-primary">
                         <div className="inline-flex flex-col space-y-6 items-start justify-start">
                           <p className="text-3xl font-bold text-white">利用料金</p>
-                          <p className="w-full text-2xl text-white">申請プラン 2,300円(税込)</p>
-                          <p className="w-full text-base text-white">※別途切手代がかかります</p>
+                          <p className="w-full text-2xl text-white">「申請サポート」プラン 500円(税込)</p>
+                          <p className="w-full text-base text-white">※80円切手代込み</p>
                         </div>
                       </div>
                     </div>
