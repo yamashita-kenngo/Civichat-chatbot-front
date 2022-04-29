@@ -2,7 +2,10 @@ module.exports = {
   purge: ['./**/*.tsx'],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      'primary': '#6CAF74'
+    })
   },
   variants: {
     extend: {
@@ -12,5 +15,7 @@ module.exports = {
       cursor: ['disabled'],
     },
   },
-  plugins: [],
+  plugins: [
+    require('tw-elements/dist/plugin')
+  ],
 }

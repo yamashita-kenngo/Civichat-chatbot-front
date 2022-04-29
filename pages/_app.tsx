@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import '../styles/global.scss'
+import '../styles/PrivacyPolicy.scss';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import { GA_TRACKING_ID, pageview } from '../src/lib/gtag';
@@ -13,6 +14,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   // Execute liff.init() when the app is initialized
   useEffect(() => {
     // to avoid `window is not defined` error
+    // @ts-ignore
+    import("tw-elements")
     import("@line/liff").then((liff) => {
       console.log("start liff.init()...");
       liff
@@ -62,7 +65,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
           rel="stylesheet"
         />
-      </Head>
+        </Head>
       <Component {...pageProps} />
     </>
   )

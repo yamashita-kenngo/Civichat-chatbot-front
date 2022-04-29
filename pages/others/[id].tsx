@@ -111,7 +111,7 @@ const OthersFromId: NextPage<Props> = ({
     <div className="container items-center justify-center mx-auto px-2">
       <HeadMeta
         path={`others/${resultId}`}
-        title={"Civichat - 結果一覧を見る"}
+        title={"結果一覧を見る"}
         description={"Civichat"}
         isTop={false}
       />

@@ -5,7 +5,9 @@ import {
   NextPage,
 } from "next";
 import HeadMeta from "../../organisms/HeadMeta";
+import PrivacyPolicy from "../../organisms/PrivacyPolicy";
 import { useState, useEffect } from "react";
+import { GA_TRACKING_ID, setUserId } from '../../src/lib/gtag';
 
 type Props = {
   service_id: string;
@@ -229,6 +231,7 @@ const systemFromId: NextPage<Props> = (props) => {
         console.log("liff.ready");
         const user = await liff.getProfile();
         setUserId(user.userId);
+        if(GA_TRACKING_ID) setUserId(user.userId);
       }
     }
     line();
@@ -769,17 +772,108 @@ const systemFromId: NextPage<Props> = (props) => {
           </div>
         </div>
       )}
-      {/*props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
+      {props.seidoType === "shibuya_parenting" && props.civichat_price !== null ? (
         <div className="w-full px-2">
-          <button onClick={async () => {
-            sendReq(userId, props.service_id);
-          } } className="container bg-green-500 font-semibold text-white py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 shadow"
-            id="payment_button">
+          <button type="button"
+            className="container bg-green-500 font-semibold text-white mb-10 py-2 px-4 border border-br-500 hover:border-transparent rounded btn-block pt-4 pb-4 shadow"
+            data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
             申請代行を申し込む(有料)
           </button>
-          <p className="mb-10">決済完了後表示されるGoogleフォームにて情報の入力をお願いいたします。</p>
+
+          <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="exampleModalScrollable" tabIndex={-1} aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div className="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
+              <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                  <h5 className="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">申請代行について</h5>
+                  <button type="button"
+                    className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div className="modal-body relative p-4">
+                  <div className="inline-flex flex-col space-y-6 items-center justify-start pt-7 bg-white">
+                    <div className="flex flex-col space-y-6 items-start justify-start">
+                      <p className="w-full h-20 text-4xl font-bold">制度の申請に必要な書類入力をサポート</p>
+                      <p className="w-full text-lg">Googleフォームに情報を入力することで、専用のロボットがお客様に代わって書類を記述します。<br/>お申込みいただくと、申請サポートキットがお手元に届き、申請が最短10分で完了します。</p>
+                    </div>
+                    <img src="/daiko1.png" alt=""/>
+                    <img src="/daiko2.png" alt=""/>
+                    <img src="/daiko3.png" alt=""/>
+                    {/*<div className="flex flex-col space-y-4 items-start justify-start w-80">
+                      <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
+                        <p className="w-5/6 text-xl font-bold">記入済みの申請用紙</p>
+                        <p className="w-full text-sm">フォームに入力した申請内容は全て印字されているので、そのまま申請可能です</p>
+                      </div>
+                      <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
+                        <p className="w-5/6 text-xl font-bold">申請サポートキット</p>
+                        <p className="w-full text-sm">Civichatの「申請サポート」機能を利用する一連の流れをパンフレットでご紹介</p>
+                      </div>
+                      <div className="flex flex-col space-y-1.5 items-center justify-end w-full h-16">
+                        <p className="w-5/6 text-xl font-bold">送信用封筒</p>
+                        <p className="w-full text-sm">宛先等が既に記入された送信用の封筒を同封します。80円切手が既に貼られているので、切手を買う手間も削減できます。</p>
+                      </div>
+                    </div>*/}
+                    <p className="text-4xl font-bold">対応制度</p>
+                    <img src="/daiko4.png" alt=""/>
+                    <img src="/daiko5.png" alt=""/>
+                    {/*<div className="inline-flex flex-col space-y-5 items-start justify-start">
+                      <div className="w-full h-60">
+                        <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-6 bg-white border rounded-2xl border-black">
+                          <div className="flex flex-col space-y-5 items-center justify-end w-full h-24">
+                            <p className="w-full text-xl font-bold">ハッピーマザー出産助成金</p>
+                            <p className="w-full text-base">出産時の経済的負担の軽減を図り、安心して出産ができるよう、出産した人にハッピーマザー出産助成金を支給します。</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-full h-60">
+                        <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-8 bg-white border rounded-2xl border-black">
+                          <div className="flex flex-col space-y-7 items-center justify-end w-full h-20">
+                            <p className="w-full text-xl font-bold">児童手当</p>
+                            <p className="w-full text-base">子育て世帯に対して、養育されている子どものために支給される手当です。</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="w-full h-1/3">
+                        <div className="inline-flex flex-col space-y-7 items-center justify-end flex-1 h-full px-6 pt-11 pb-5 bg-white border rounded-2xl border-black">
+                          <div className="flex flex-col space-y-5 items-center justify-end w-full h-32">
+                            <p className="w-full text-xl font-bold">病児・病後児保育利用料金助成</p>
+                            <p className="w-full text-base">お子さんが病気やケガで保育施設に登園できない場合、仕事があるなどの理由で、ご自宅でベビーシッターなどのサービスを利用した時に、その料金の一部を区が助成する制度です。</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-full h-48">
+                      <div className="flex items-start justify-center flex-1 h-full px-3 pt-7 pb-9 bg-primary">
+                        <div className="inline-flex flex-col space-y-6 items-start justify-start">
+                          <p className="text-3xl font-bold text-white">利用料金</p>
+                          <p className="w-full text-xl text-white">「申請サポート」プラン 500円(税込)</p>
+                          <p className="w-full text-base text-white">※80円切手代込み</p>
+                        </div>
+                      </div>
+                    </div>*/}
+                  </div>
+                  <PrivacyPolicy />
+                </div>
+
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                  <p>決済完了後表示されるGoogleフォームにて情報の入力をお願いいたします。(ログインが求められる場合がございます。)</p>
+                  <button type="button"
+                    className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                    data-bs-dismiss="modal">
+                    戻る
+                  </button>
+                  <button onClick={async () => {
+                    sendReq(userId, props.service_id);
+                  } } className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                    id="payment_button">
+                    確認しました
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        ) : undefined*/}
+        ) : undefined}
 
       {props.othersType === "園への" ? (
         <div>
