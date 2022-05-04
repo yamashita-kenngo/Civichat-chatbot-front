@@ -257,12 +257,13 @@ const systemFromId: NextPage<Props> = (props) => {
         <p className="py-2">{props.abstract}</p>
       ) : undefined}
       <table className="py-2 border-collapse">
-        {props.target !== undefined ? (
+        {/* {props.target !== undefined ? (
+        // 一旦ここ非表示
           <tr>
             <td className="text-gray-500 w-2/5 py-2">対象者</td>
             <td className=" ">{props.target}</td>
           </tr>
-        ) : undefined}
+        ) : undefined} */}
         {props.amount !== undefined ? (
           <tr>
             <td className="text-gray-500 w-2/5 py-2">支援額（想定）</td>
@@ -674,6 +675,27 @@ const systemFromId: NextPage<Props> = (props) => {
         <div>
           <h2 className="mt-3 text-2xl font-bold">申込受付先</h2>
           <p className="my-2 mb-5">{props.apply}</p>
+        </div>
+      ) : undefined}
+
+      
+      {props.target !== undefined ? (
+        // 以下を一旦追加
+        <div>
+          <h2 className="mt-3 text-2xl font-bold">
+            {props.othersType}対象者
+          </h2>
+          {props.seidoType === "shibuya_preschool" ? (
+            // <a href={`tel:${props.contact}`}>
+              <td className="py-2">{props.target}</td>
+            // </a>
+          ) : (
+            props.seidoType === "kumamoto_earthquake") ? (
+              <td className="py-2">{props.target}</td>
+            ) : (
+              <td className="py-2">{props.target?.replace(/(https?|http?)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)/, '')}</td>
+            )
+          }
         </div>
       ) : undefined}
 
